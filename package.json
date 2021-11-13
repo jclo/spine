@@ -1,6 +1,6 @@
 {
   "name": "@mobilabs/spine",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A tiny MVC framework inspired from Backbone.js",
   "main": "_dist/lib/spine.js",
   "minified": "_dist/lib/spine.min.js",
@@ -44,7 +44,6 @@
     "@mobilabs/overslash": "^1.0.5"
   },
   "devDependencies": {
-    "@mobilabs/es6kadoo": "^1.0.8",
     "body-parser": "^1.19.0",
     "chai": "^4.3.4",
     "cookie-parser": "^1.4.5",
@@ -65,12 +64,13 @@
     "gulp-uglify-es": "^3.0.0",
     "husky": "^7.0.4",
     "jsdom": "^18.0.1",
-    "kadoo": "^1.0.4",
+    "kadoo": "^1.0.5",
     "mocha": "^8.4.0",
     "node-fetch": "^2.6.6",
     "nyc": "^15.1.0",
     "open": "^8.4.0",
-    "opener": "^1.5.2"
+    "opener": "^1.5.2",
+    "@mobilabs/es6kadoo": "1.0.9"
   },
   "publishConfig": {
     "access": "public"

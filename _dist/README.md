@@ -161,15 +161,15 @@ A tiny MVC framework inspired by Backbone.js.
 
 <!--- URls -->
 
-[npm-image]: https://img.shields.io/npm/v/@mobilabs/spine.svg?style=flat-square
-[release-image]: https://img.shields.io/github/release/jclo/spine.svg?include_prereleases&style=flat-square
-[commit-image]: https://img.shields.io/github/last-commit/jclo/spine.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/jclo/spine.svg?style=flat-square
-[coveralls-image]: https://img.shields.io/coveralls/jclo/spine/master.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/@mobilabs/spine.svg?logo=npm&logoColor=fff&label=NPM+package
+[release-image]: https://img.shields.io/github/release/jclo/spine.svg?include_prereleases
+[commit-image]: https://img.shields.io/github/last-commit/jclo/spine.svg?logo=github
+[travis-image]: https://img.shields.io/travis/com/jclo/spine.svg?logo=travis-ci&logoColor=fff
+[coveralls-image]: https://img.shields.io/coveralls/jclo/spine/master.svg?&logo=coveralls
 [dependencies-image]: https://david-dm.org/jclo/spine/status.svg?theme=shields.io
 [devdependencies-image]: https://david-dm.org/jclo/spine/dev-status.svg?theme=shields.io
-[npm-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@mobilabs/spine.svg?style=flat-square
-[license-image]: https://img.shields.io/npm/l/@mobilabs/spine.svg?style=flat-square
+[npm-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@mobilabs/spine.svg
+[license-image]: https://img.shields.io/npm/l/@mobilabs/spine.svg
 
 [npm-url]: https://www.npmjs.com/package/@mobilabs/spine
 [release-url]: https://github.com/jclo/spine/tags
