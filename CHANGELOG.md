@@ -3,6 +3,7 @@
 ### 0.9.2 (December 21, 2021)
 
   * Added the methods length, next and previous to collection,
+  * Added the missing files,
   * ...,
 
 
