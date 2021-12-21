@@ -15,7 +15,7 @@ const should     = require('chai').should()
 
 // -- Local Constants
 const OWN_PROPERTIES = 6
-    , INH_PROPERTIES = 19
+    , INH_PROPERTIES = 22
     ;
 
 
@@ -81,13 +81,14 @@ module.exports = function(Spine) {
   describe('Test Spine.Collection object inherited properties:', () => {
     // [
     //  '_ginit', '_init', 'on', 'one', 'off', 'fire', 'trigger',
-    //  'initialize', 'listen', 'get', 'each', 'empty', 'add',
-    //  'remove' 'fetch', 'save', 'delete', 'urify', 'constructor'
+    //  'initialize', 'listen', 'get', 'each', 'next', 'previous', 'length',
+    // 'empty', 'add', 'remove' 'fetch', 'save', 'delete', 'urify',
+    // 'constructor'
     // ]
 
     const c = C();
     const ip = Object.getOwnPropertyNames((Object.getPrototypeOf(c)));
-    it('Expects Spine.Collection()() to inherit 19 properties.', () => {
+    it(`Expects Spine.Collection()() to inherit ${INH_PROPERTIES} properties.`, () => {
       expect(ip).to.be.an('array').that.has.lengthOf(INH_PROPERTIES);
     });
   });

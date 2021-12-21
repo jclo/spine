@@ -18,6 +18,8 @@ const test1 = require('./collection/collection_1')
     , test5 = require('./collection/collection_5')
     , test6 = require('./collection/collection_6')
     , test7 = require('./collection/collection_7')
+    , test8 = require('./collection/collection_8')
+    , test9 = require('./collection/collection_9')
     ;
 
 
@@ -37,5 +39,7 @@ module.exports = function(Spine, apiserver) {
     test5(Spine, apiserver);
     test6(Spine, apiserver);
     test7(Spine, apiserver);
+    test8(Spine, apiserver);
+    test9(Spine, apiserver);
   });
 };

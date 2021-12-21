@@ -6,11 +6,17 @@
  * can't be intantiated.
  *
  * Private Functions:
+ *  . _nextOrprevious             returns the next/previous model in a collection,
+ *  . _delArgs                    decodes the deleted arguments,
+ *  . _delete                     deletes the requested models,
  *  . _get                        returns a model specified by a cid or an id,
  *
  *
  * Public Static Methods:
  *  . get                         returns a model specified by a cid or an id,
+ *  . delete                      deletes the requested models,
+ *  . next                        returns the next model in a collection,
+ *  . previous                    returns the previous model in a collection,
  *
  *
  *
@@ -40,6 +46,36 @@ import F from '../../../sync/main';
 
 
 // -- Private Functions ----------------------------------------------------
+
+/**
+ * Returns the next or previous model in a collection from the passed-in model.
+ *
+ * @method (arg1, arg2, arg3)
+ * @public
+ * @param {Object}        the collection,
+ * @param {String/Number} the cid or id of the model,
+ * @param {Boolean}       true the next model, false the previous,
+ * @returns {Object}      returns the found model or null,
+ * @since 0.0.0
+ */
+function _nextOrprevious(collection, id, next) {
+  let n = parseInt(id, 10);
+  n = !Number.isNaN(n) ? n : null;
+
+  for (let i = 0; i < collection._models.length; i++) {
+    if (collection._models[i].cid === id || collection._models[i]._attributes.id === n) {
+      if (next) {
+        return i + 1 >= collection._models.length
+          ? collection._models[0]
+          : collection._models[i + 1];
+      }
+      return i - 1 < 0
+        ? collection._models[collection._models.length - 1]
+        : collection._models[i - 1];
+    }
+  }
+  return null;
+}
 
 /**
  * Decodes the deleted arguments.
@@ -95,28 +131,6 @@ function _delArgs(...args) {
       }
       return [[], {}, null];
   }
-}
-
-/**
- * Returns a model specified by a cid or an id.
- *
- * @function (arg1, arg2, [arg3])
- * @private
- * @param {Object}          the collection object,
- * @param {String/Number}   the cid or id,
- * @param {Object}          the options,
- * @returns {Object}        returns the requested model or null,
- * @since 0.0.0
- */
-function _get(col, id/* , options */) {
-  if (!id) return null;
-
-  for (let i = 0; i < col._models.length; i++) {
-    if (col._models[i].cid === id || col._models[i]._attributes.id === id) {
-      return col._models[i];
-    }
-  }
-  return null;
 }
 
 /**
@@ -176,6 +190,28 @@ function _delete(col, ...args) {
   });
 }
 
+/**
+ * Returns a model specified by a cid or an id.
+ *
+ * @function (arg1, arg2, [arg3])
+ * @private
+ * @param {Object}          the collection object,
+ * @param {String/Number}   the cid or id,
+ * @param {Object}          the options,
+ * @returns {Object}        returns the requested model or null,
+ * @since 0.0.0
+ */
+function _get(col, id/* , options */) {
+  if (!id) return null;
+
+  for (let i = 0; i < col._models.length; i++) {
+    if (col._models[i].cid === id || col._models[i]._attributes.id === id) {
+      return col._models[i];
+    }
+  }
+  return null;
+}
+
 
 // -- Public Static Methods ------------------------------------------------
 
@@ -211,6 +247,34 @@ const Util = {
   delete(col, ...args) {
     _delete(col, ...args);
     return this;
+  },
+
+  /**
+   * Returns the next model in a collection from the passed-in model.
+   *
+   * @method (arg1, arg2)
+   * @public
+   * @param {Object}        the collection,
+   * @param {String/Number} the cid or id of the model,
+   * @returns {Object}      returns the found model or null,
+   * @since 0.0.0
+   */
+  next(collection, id) {
+    return _nextOrprevious(collection, id, true);
+  },
+
+  /**
+   * Returns the previous model in a collection from the passed-in model.
+   *
+   * @method (arg1, arg2)
+   * @public
+   * @param {Object}        the collection,
+   * @param {String/Number} the cid or id of the model,
+   * @returns {Object}      returns the found model or null,
+   * @since 0.0.0
+   */
+  previous(collection, id) {
+    return _nextOrprevious(collection, id);
   },
 };
 

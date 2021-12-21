@@ -72,6 +72,9 @@ A tiny MVC framework inspired by Backbone.js.
 | **Public Methods**        |                                                  |
 | get                       | returns a model from its cid or id               |
 | each                      | returns the models one by one                    |
+| next                      | returns the next model from the given model      |
+| previous                  | returns the previous model from the given model  |
+| length                    | returns the number of models in the collection   |
 | empty                     | deletes a collection (not from server)           |
 | add                       | adds one or more objects to the collection       |
 | remove                    | removes model(s) from the collection             |

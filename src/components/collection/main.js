@@ -27,6 +27,9 @@
  * Public Methods:
  *  . get                         gets a model from its cid or id,
  *  . each                        returns the models one by one,
+ *  . next                        returns the next model from the given model,
+ *  . previous                    returns the previous model from the given model,
+ *  . length                      returns the number of models in the collection,
  *  . set                         to be done .........,
  *  . empty                       deletes the collection,
  *  . add                         adds one or many objects to the collection,
@@ -198,6 +201,48 @@ cmethods = {
       callback(this._models[i], i);
     }
     return this;
+  },
+
+  /**
+   * Returns the next model in a collection from the passed-in model.
+   * (public method - must not be overwritten)
+   *
+   * @method (arg1)
+   * @public
+   * @param {String/Number} the cid or id of the model,
+   * @returns {Object}      returns the found model or null,
+   * @since 0.0.0
+   */
+  next(id) {
+    return U2.next(this, id);
+  },
+
+  /**
+   * Returns the previous model in a collection from the passed-in model.
+   * (public method - must not be overwritten)
+   *
+   * @method (arg1)
+   * @public
+   * @param {String/Number} the cid or id of the model,
+   * @returns {Object}      returns the found model or null,
+   * @since 0.0.0
+   */
+  previous(id) {
+    return U2.previous(this, id);
+  },
+
+  /**
+   * Returns the collection length.
+   * (public method - must not be overwritten)
+   *
+   * @method ()
+   * @public
+   * @param {}              -,
+   * @returns {Number}      returns the collection length,
+   * @since 0.0.0
+   */
+  length() {
+    return this._models.length;
   },
 
   /**

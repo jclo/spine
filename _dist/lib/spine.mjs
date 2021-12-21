@@ -1,5 +1,5 @@
 /*! ****************************************************************************
- * Spine v0.9.1
+ * Spine v0.9.2
  *
  * A tiny MVC framework inspired from Backbone.js.
  * (you can download it from npm or github repositories)
@@ -118,7 +118,7 @@ const $__ES6GLOB = {};
 
       // Useful to retrieve the library name and version when it is
       // embedded in another library as an object:
-      _library: { name: 'Spine', version: '0.9.1' },
+      _library: { name: 'Spine', version: '0.9.2' },
 
 
       // -- Private Static Methods ---------------------------------------------
@@ -265,7 +265,7 @@ const $__ES6GLOB = {};
 
     // Attaches constants to Spine that provide name and version of the lib.
     Spine.NAME = 'Spine';
-    Spine.VERSION = '0.9.1';
+    Spine.VERSION = '0.9.2';
 
 
     // -- Export
@@ -676,6 +676,9 @@ const $__ES6GLOB = {};
      * Public Methods:
      *  . get                         gets a model from its cid or id,
      *  . each                        returns the models one by one,
+     *  . next                        returns the next model from the given model,
+     *  . previous                    returns the previous model from the given model,
+     *  . length                      returns the number of models in the collection,
      *  . set                         to be done .........,
      *  . empty                       deletes the collection,
      *  . add                         adds one or many objects to the collection,
@@ -847,6 +850,48 @@ const $__ES6GLOB = {};
           callback(this._models[i], i);
         }
         return this;
+      },
+
+      /**
+       * Returns the next model in a collection from the passed-in model.
+       * (public method - must not be overwritten)
+       *
+       * @method (arg1)
+       * @public
+       * @param {String/Number} the cid or id of the model,
+       * @returns {Object}      returns the found model or null,
+       * @since 0.0.0
+       */
+      next(id) {
+        return U2.next(this, id);
+      },
+
+      /**
+       * Returns the previous model in a collection from the passed-in model.
+       * (public method - must not be overwritten)
+       *
+       * @method (arg1)
+       * @public
+       * @param {String/Number} the cid or id of the model,
+       * @returns {Object}      returns the found model or null,
+       * @since 0.0.0
+       */
+      previous(id) {
+        return U2.previous(this, id);
+      },
+
+      /**
+       * Returns the collection length.
+       * (public method - must not be overwritten)
+       *
+       * @method ()
+       * @public
+       * @param {}              -,
+       * @returns {Number}      returns the collection length,
+       * @since 0.0.0
+       */
+      length() {
+        return this._models.length;
       },
 
       /**
@@ -3255,11 +3300,17 @@ const $__ES6GLOB = {};
      * can't be intantiated.
      *
      * Private Functions:
+     *  . _nextOrprevious             returns the next/previous model in a collection,
+     *  . _delArgs                    decodes the deleted arguments,
+     *  . _delete                     deletes the requested models,
      *  . _get                        returns a model specified by a cid or an id,
      *
      *
      * Public Static Methods:
      *  . get                         returns a model specified by a cid or an id,
+     *  . delete                      deletes the requested models,
+     *  . next                        returns the next model in a collection,
+     *  . previous                    returns the previous model in a collection,
      *
      *
      *
@@ -3289,6 +3340,36 @@ const $__ES6GLOB = {};
 
 
     // -- Private Functions ----------------------------------------------------
+
+    /**
+     * Returns the next or previous model in a collection from the passed-in model.
+     *
+     * @method (arg1, arg2, arg3)
+     * @public
+     * @param {Object}        the collection,
+     * @param {String/Number} the cid or id of the model,
+     * @param {Boolean}       true the next model, false the previous,
+     * @returns {Object}      returns the found model or null,
+     * @since 0.0.0
+     */
+    function _nextOrprevious(collection, id, next) {
+      let n = parseInt(id, 10);
+      n = !Number.isNaN(n) ? n : null;
+
+      for (let i = 0; i < collection._models.length; i++) {
+        if (collection._models[i].cid === id || collection._models[i]._attributes.id === n) {
+          if (next) {
+            return i + 1 >= collection._models.length
+              ? collection._models[0]
+              : collection._models[i + 1];
+          }
+          return i - 1 < 0
+            ? collection._models[collection._models.length - 1]
+            : collection._models[i - 1];
+        }
+      }
+      return null;
+    }
 
     /**
      * Decodes the deleted arguments.
@@ -3344,28 +3425,6 @@ const $__ES6GLOB = {};
           }
           return [[], {}, null];
       }
-    }
-
-    /**
-     * Returns a model specified by a cid or an id.
-     *
-     * @function (arg1, arg2, [arg3])
-     * @private
-     * @param {Object}          the collection object,
-     * @param {String/Number}   the cid or id,
-     * @param {Object}          the options,
-     * @returns {Object}        returns the requested model or null,
-     * @since 0.0.0
-     */
-    function _get(col, id/* , options */) {
-      if (!id) return null;
-
-      for (let i = 0; i < col._models.length; i++) {
-        if (col._models[i].cid === id || col._models[i]._attributes.id === id) {
-          return col._models[i];
-        }
-      }
-      return null;
     }
 
     /**
@@ -3425,6 +3484,28 @@ const $__ES6GLOB = {};
       });
     }
 
+    /**
+     * Returns a model specified by a cid or an id.
+     *
+     * @function (arg1, arg2, [arg3])
+     * @private
+     * @param {Object}          the collection object,
+     * @param {String/Number}   the cid or id,
+     * @param {Object}          the options,
+     * @returns {Object}        returns the requested model or null,
+     * @since 0.0.0
+     */
+    function _get(col, id/* , options */) {
+      if (!id) return null;
+
+      for (let i = 0; i < col._models.length; i++) {
+        if (col._models[i].cid === id || col._models[i]._attributes.id === id) {
+          return col._models[i];
+        }
+      }
+      return null;
+    }
+
 
     // -- Public Static Methods ------------------------------------------------
 
@@ -3460,6 +3541,34 @@ const $__ES6GLOB = {};
       delete(col, ...args) {
         _delete(col, ...args);
         return this;
+      },
+
+      /**
+       * Returns the next model in a collection from the passed-in model.
+       *
+       * @method (arg1, arg2)
+       * @public
+       * @param {Object}        the collection,
+       * @param {String/Number} the cid or id of the model,
+       * @returns {Object}      returns the found model or null,
+       * @since 0.0.0
+       */
+      next(collection, id) {
+        return _nextOrprevious(collection, id, true);
+      },
+
+      /**
+       * Returns the previous model in a collection from the passed-in model.
+       *
+       * @method (arg1, arg2)
+       * @public
+       * @param {Object}        the collection,
+       * @param {String/Number} the cid or id of the model,
+       * @returns {Object}      returns the found model or null,
+       * @since 0.0.0
+       */
+      previous(collection, id) {
+        return _nextOrprevious(collection, id);
       },
     };
 
@@ -4110,14 +4219,14 @@ const $__ES6GLOB = {};
     /* index: 18, path: 'node_modules/@mobilabs/messenger/_dist/lib/messenger.js' */
     /* export: Messenger, link: 'libin.messenger' */
     /*! ****************************************************************************
-     * Messenger v1.0.1
+     * Messenger v1.0.2
      *
      * A tiny Javascript library to handle messages that carry a payload.
      * (you can download it from npm or github repositories)
      * Copyright (c) 2021 Mobilabs <contact@mobilabs.fr> (http://www.mobilabs.fr).
      * Released under the MIT license. You may obtain a copy of the License
      * at: http://www.opensource.org/licenses/mit-license.php).
-     * Built from ES6lib v1.0.11.
+     * Built from ES6lib v1.0.12.
      * ************************************************************************** */
     // ESLint declarations
     /* - */
@@ -4239,7 +4348,7 @@ const $__ES6GLOB = {};
           const obj = Object.create(methods);
           obj._library = {
             name: 'Messenger',
-            version: '1.0.1',
+            version: '1.0.2',
           };
           // Initializes the message database to empty:
           obj._db = {};
@@ -4248,7 +4357,7 @@ const $__ES6GLOB = {};
 
         // Attaches constants to Messenger that provide name and version of the lib.
         Messenger.NAME = 'Messenger';
-        Messenger.VERSION = '1.0.1';
+        Messenger.VERSION = '1.0.2';
 
 
         // -- Private Static Methods -----------------------------------------------
@@ -4650,14 +4759,14 @@ const $__ES6GLOB = {};
     /* index: 20, path: 'node_modules/@mobilabs/overslash/_dist/lib/overslash-obj.js' */
     /* export: Overslash, link: 'libin.overslashobj' */
     /*! ****************************************************************************
-     * Overslash v1.0.5
+     * Overslash v1.0.6
      *
      * A tiny modular Javascript utility library.
      * (you can download it from npm or github repositories)
-     * Copyright (c) 2020 Mobilabs <contact@mobilabs.fr> (http://www.mobilabs.fr).
+     * Copyright (c) 2021 Mobilabs <contact@mobilabs.fr> (http://www.mobilabs.fr).
      * Released under the MIT license. You may obtain a copy of the License
      * at: http://www.opensource.org/licenses/mit-license.php).
-     * Built from ES6lib v1.0.1.
+     * Built from ES6lib v1.0.12.
      * ************************************************************************** */
     // ESLint declarations
     /* - */
@@ -4877,7 +4986,7 @@ const $__ES6GLOB = {};
 
           // Useful to retrieve the library name and version when it is
           // embedded in another library as an object:
-          _library: { name: 'Overslash', version: '1.0.5' },
+          _library: { name: 'Overslash', version: '1.0.6' },
 
 
           // -- Private Static Methods ---------------------------------------------
@@ -4936,7 +5045,7 @@ const $__ES6GLOB = {};
 
         // Attaches constants to Overslash that provide name and version of the lib.
         Overslash.NAME = 'Overslash';
-        Overslash.VERSION = '1.0.5';
+        Overslash.VERSION = '1.0.6';
 
 
         // Extends Overslash with new static methods.
@@ -5368,7 +5477,7 @@ const $__ES6GLOB = {};
                 if (this.isLiteralObject(arguments[i][prop])) {
                   obj[prop] = obj[prop] !== undefined ? obj[prop] : {};
                   this.extend(obj[prop], arguments[i][prop]);
-                } /* istanbul ignore next */ else if (hasOwnProperty.call(source, prop)) {
+                } else if (hasOwnProperty.call(source, prop)) {
                   obj[prop] = this.isArray(source[prop])
                     ? this.clone(source[prop])
                     : source[prop];
