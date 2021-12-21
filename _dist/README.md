@@ -9,7 +9,7 @@
 <!-- [![Dependencies status][dependencies-image]][dependencies-url]
 [![Dev Dependencies status][devdependencies-image]][devdependencies-url] -->
 
-A tiny MVC framework inspired by Backbone.js.
+A tiny MVC framework freely inspired by Backbone.js.
 
 
 ## Spine API

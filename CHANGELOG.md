@@ -4,6 +4,7 @@
 
   * Added the methods length, next and previous to collection,
   * Added the missing files,
+  * Release.
   * ...,
 
 
