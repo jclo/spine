@@ -1,11 +1,17 @@
 ### HEAD
 
+### 0.9.3 (January 26, 2022)
+
+  * Updated the project dependencies,
+  * Updated the copyright,
+  * ...,
+
+
 ### 0.9.2 (December 21, 2021)
 
   * Added the methods length, next and previous to collection,
   * Added the missing files,
   * Release.
-  * ...,
 
 
 ### 0.9.1 (November 13, 2021)

@@ -6,4 +6,6 @@ _old_*
 coverage
 node_modules
 
+examplees
+examples
 test/db
