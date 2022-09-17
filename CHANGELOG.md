@@ -5,7 +5,7 @@
   * Fixed an issue that prevented to use properly a model with _id instead of id,
   * Fixed an issue that prevents _nextOrprevious method to work with non numerical ids,
   * Updated the project dependencies,
-  * ...,
+  * Release.
 
 
 ### 0.9.3 (January 26, 2022)
