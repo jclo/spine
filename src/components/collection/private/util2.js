@@ -59,11 +59,11 @@ import F from '../../../sync/main';
  * @since 0.0.0
  */
 function _nextOrprevious(collection, id, next) {
-  let n = parseInt(id, 10);
-  n = !Number.isNaN(n) ? n : null;
+  // let n = parseInt(id, 10);
+  // n = !Number.isNaN(n) ? n : null;
 
   for (let i = 0; i < collection._models.length; i++) {
-    if (collection._models[i].cid === id || collection._models[i]._attributes.id === n) {
+    if (collection._models[i].cid === id || collection._models[i]._attributes.id === id) {
       if (next) {
         return i + 1 >= collection._models.length
           ? collection._models[0]

@@ -124,7 +124,6 @@ A tiny MVC framework freely inspired by Backbone.js.
 
 | Static Methods            | Description                                      |
 |:--------------------------|:-------------------------------------------------|
-| Spine.Router({})          | returns a child constructor                      |
 | start                     | starts recording the route history               |
 | stop                      | stops recording the route history                |
 | isHistoryRunning          | returns the history state                        |

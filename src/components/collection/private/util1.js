@@ -109,50 +109,110 @@ function _getArgs(...args) {
  * @returns {Array}         returns the added objects,
  * @since 0.0.0
  */
-function _add(col, models, options) {
+function _add(col, /* models */items, options) {
+  // const ids   = col._ids
+  //     , cids  = col._cids
+  //     , Model = col.model
+  //     ;
+  //
+  // let nmodels;
+  // if (_.isLiteralObject(models)) {
+  //   nmodels = [models];
+  // } else if (_.isArray(models)) {
+  //   nmodels = models;
+  // } else {
+  //   nmodels = [];
+  // }
+  //
+  // const out = [];
+  // let m;
+  // let mo;
+  // let cm;
+  // let attrs;
+  // for (let i = 0; i < nmodels.length; i++) {
+  //   if (_.isLiteralObject(nmodels[i]) && !ids.includes(nmodels[i].id)) {
+  //     if (nmodels[i].id) ids.push(nmodels[i].id);
+  //     m = Model(nmodels[i], { parse: options && options.parse });
+  //     m.cid = `c${cids.length + 1}`;
+  //     cids.push(m.cid);
+  //     col._models.push(m);
+  //     cm = _.clone(m);
+  //     out.push(cm);
+  //     if (!options || !options.silent) col.fire('add', cm);
+  //   } else if (_.isLiteralObject(nmodels[i]) && ids.includes(nmodels[i].id)) {
+  //     // The model already exists, we update its attributes with
+  //     // the new passed-in:
+  //     m = Model(nmodels[i], { parse: options && options.parse }).getAll();
+  //     attrs = Object.keys(m);
+  //     mo = col.get(nmodels[i].id);
+  //     for (let j = 0; j < attrs.length; j++) {
+  //       mo._attributes[attrs[j]] = m[attrs[j]];
+  //     }
+  //     cm = _.clone(mo);
+  //     out.push(cm);
+  //     if (!options || !options.silent) col.fire('add', cm);
+  //   }
+  // }
+  // if (!options || !options.silent) col.fire('addcomplete', out);
+  // return out;
+
+  // This algorithm has been reworked to create the model before any
+  // operation and thus take care of the model.parse processing. For
+  // instance if the server use _id instead of id (mongodb), model.parse
+  // could create an id that duplicates _id and now we can register it
+  // in collectiion._ids.
   const ids   = col._ids
       , cids  = col._cids
       , Model = col.model
+      , out   = []
       ;
 
-  let nmodels;
-  if (_.isLiteralObject(models)) {
-    nmodels = [models];
-  } else if (_.isArray(models)) {
-    nmodels = models;
+  let childs;
+  if (_.isLiteralObject(items)) {
+    childs = [items];
+  } else if (_.isArray(items)) {
+    childs = items;
   } else {
-    nmodels = [];
+    childs = [];
   }
 
-  const out = [];
-  let m;
-  let mo;
-  let cm;
-  let attrs;
-  for (let i = 0; i < nmodels.length; i++) {
-    if (_.isLiteralObject(nmodels[i]) && !ids.includes(nmodels[i].id)) {
-      if (nmodels[i].id) ids.push(nmodels[i].id);
-      m = Model(nmodels[i], { parse: options && options.parse });
-      m.cid = `c${cids.length + 1}`;
-      cids.push(m.cid);
-      col._models.push(m);
-      cm = _.clone(m);
-      out.push(cm);
-      if (!options || !options.silent) col.fire('add', cm);
-    } else if (_.isLiteralObject(nmodels[i]) && ids.includes(nmodels[i].id)) {
-      // The model already exists, we update its attributes with
-      // the new passed-in:
-      m = Model(nmodels[i], { parse: options && options.parse }).getAll();
-      attrs = Object.keys(m);
-      mo = col.get(nmodels[i].id);
-      for (let j = 0; j < attrs.length; j++) {
-        mo._attributes[attrs[j]] = m[attrs[j]];
+  let model
+    , clomodel
+    , id
+    , mo
+    , cm
+    , attrs
+    ;
+
+  for (let i = 0; i < childs.length; i++) {
+    if (_.isLiteralObject(childs[i])) {
+      model = Model(childs[i], { parse: options && options.parse });
+      id = model.get('id');
+      if (!ids.includes(id)) {
+        if (id) {
+          ids.push(id);
+        }
+        model.cid = `c${cids.length + 1}`;
+        cids.push(model.cid);
+        col._models.push(model);
+        clomodel = _.clone(model);
+        out.push(clomodel);
+        if (!options || !options.silent) {
+          col.fire('add', clomodel);
+        }
+      } else {
+        attrs = Object.keys(model.getAll());
+        mo = col.get(model.get('id'));
+        for (let j = 0; j < attrs.length; j++) {
+          mo._attributes[attrs[j]] = model._attributes[attrs[j]];
+        }
+        cm = _.clone(mo);
+        out.push(cm);
+        if (!options || !options.silent) col.fire('add', cm);
       }
-      cm = _.clone(mo);
-      out.push(cm);
-      if (!options || !options.silent) col.fire('add', cm);
     }
   }
+
   if (!options || !options.silent) col.fire('addcomplete', out);
   return out;
 }
