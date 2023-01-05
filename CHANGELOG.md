@@ -1,5 +1,12 @@
 ### HEAD
 
+### 0.9.5 (January, 5, 2023)
+
+  * Updated the copyright date,
+  * Improved the fetch method to comply with http/2 and the suppression of statusText,
+  * ...,
+
+
 ### 0.9.4 (September 17, 2022)
 
   * Fixed an issue that prevented to use properly a model with _id instead of id,
