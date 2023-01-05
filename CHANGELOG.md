@@ -4,7 +4,7 @@
 
   * Updated the copyright date,
   * Improved the fetch method to comply with http/2 and the suppression of statusText,
-  * ...,
+  * Release.
 
 
 ### 0.9.4 (September 17, 2022)
