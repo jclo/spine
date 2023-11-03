@@ -1,5 +1,11 @@
 ### HEAD
 
+### 1.0.0 (November 3, 2023)
+
+  * Updated the project with @mobilabs/es6kadoo v1.1 (no Gulp),
+  * ...,
+
+
 ### 0.9.5 (January, 5, 2023)
 
   * Updated the copyright date,

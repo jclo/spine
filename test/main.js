@@ -24,7 +24,7 @@ const pack           = require('../package.json')
 
 // -- Local Constants
 const apiserver = 'http://localhost:1080'
-    , libname = 'Spine'
+    , libname   = 'Spine'
     ;
 
 
@@ -82,3 +82,5 @@ describe('Test Spine:', () => {
   testhistory(Spine);
   testintercom(Spine);
 });
+
+// - oOo --
