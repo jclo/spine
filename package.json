@@ -1,6 +1,6 @@
 {
   "name": "@mobilabs/spine",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "A tiny MVC framework inspired from Backbone.js",
   "main": "_dist/lib/spine.js",
   "minified": "_dist/lib/spine.min.js",
@@ -44,11 +44,15 @@
 
     "deployment": " --- DEPLOYMENT --- ",
     "dep:prod": "rm -rf _dist-$npm_package_version && npm run build:prod && cp -r _dist _dist-$npm_package_version",
-    "dep:private": "npm run build:prod && node tasks/dep.private.js && sh tasks/compress.sh ${npm_package_name} ${npm_package_version} @mobilabs",
+
+    "doc:kasar": " --- DOC ---",
+    "doc:create": "",
+    "doc:build": "kasar build",
+    "doc:watch": "kasar watch",
+    "doc:run": "kasar serve --port $1",
 
     "others": " --- OTHERS ---",
-    "prepare": "husky install",
-    "doc": ""
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -72,7 +76,7 @@
     "@mobilabs/overslash": "^1.0.7"
   },
   "devDependencies": {
-    "@mobilabs/es6kadoo": "1.1.1",
+    "@mobilabs/kasar": "^2.3.1",
     "chai": "^4.3.7",
     "cookie-parser": "^1.4.6",
     "coveralls": "^3.1.1",
@@ -91,7 +95,8 @@
     "node-fetch": "^2.7.0",
     "nodemon": "^2.0.22",
     "nyc": "^15.1.0",
-    "terser": "^5.17.4"
+    "terser": "^5.17.4",
+    "@mobilabs/es6kadoo": "1.1.1"
   },
   "publishConfig": {
     "access": "public"

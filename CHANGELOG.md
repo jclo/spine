@@ -1,8 +1,9 @@
 ### HEAD
 
-### 1.0.0 (November 3, 2023)
+### 1.0.0 (November 4, 2023)
 
   * Updated the project with @mobilabs/es6kadoo v1.1 (no Gulp),
+  * Added Kasar doc,
   * ...,
 
 

@@ -1,5 +1,5 @@
 /*! ****************************************************************************
- * Spine v1.0.0-beta.1
+ * Spine v1.0.0
  *
  * A tiny MVC framework inspired from Backbone.js.
  * (you can download it from npm or github repositories)
@@ -118,7 +118,7 @@ const $__ES6GLOB = {};
 
       // Useful to retrieve the library name and version when it is
       // embedded in another library as an object:
-      _library: { name: 'Spine', version: '1.0.0-beta.1' },
+      _library: { name: 'Spine', version: '1.0.0' },
 
 
       // -- Private Static Methods ---------------------------------------------
@@ -265,7 +265,7 @@ const $__ES6GLOB = {};
 
     // Attaches constants to Spine that provide name and version of the lib.
     Spine.NAME = 'Spine';
-    Spine.VERSION = '1.0.0-beta.1';
+    Spine.VERSION = '1.0.0';
 
 
     // -- Export

@@ -6,6 +6,12 @@ _old_*
 coverage
 node_modules
 
+_dist-*
 examplees
 examples
 test/db
+
+site/*
+!site/styles
+!site/webpages
+!site/config.js
