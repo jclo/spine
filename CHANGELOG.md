@@ -4,7 +4,7 @@
 
   * Updated the project with @mobilabs/es6kadoo v1.1 (no Gulp),
   * Added Kasar doc,
-  * ...,
+  * Release.
 
 
 ### 0.9.5 (January, 5, 2023)
