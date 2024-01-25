@@ -4,6 +4,7 @@
 
   * Updated the project with @mobilabs/es6kadoo v2.1 (Github Actions),
   * Updated Node.js version in ci.yml,
+  * Replaced Travis CI badges with Github Actions badges in the README.md file,
   * ...,
 
 
