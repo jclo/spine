@@ -3,6 +3,7 @@
 ### 1.0.x (January 25, 2024)
 
   * Updated the project with @mobilabs/es6kadoo v2.1 (Github Actions),
+  * Updated Node.js version in ci.yml,
   * ...,
 
 
