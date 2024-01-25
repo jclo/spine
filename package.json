@@ -1,6 +1,6 @@
 {
   "name": "@mobilabs/spine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tiny MVC framework inspired from Backbone.js",
   "main": "_dist/lib/spine.js",
   "minified": "_dist/lib/spine.min.js",

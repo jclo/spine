@@ -1,11 +1,11 @@
 ### HEAD
 
-### 1.0.x (January 25, 2024)
+### 1.0.1 (January 25, 2024)
 
   * Updated the project with @mobilabs/es6kadoo v2.1 (Github Actions),
-  * Updated Node.js version in ci.yml,
+  * Updated Node.js to v20 in ci.yml, otherwise fetch method won't work,
   * Replaced Travis CI badges with Github Actions badges in the README.md file,
-  * ...,
+  * Release.
 
 
 ### 1.0.0 (November 4, 2023)

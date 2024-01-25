@@ -2,12 +2,10 @@
 
 [![NPM version][npm-image]][npm-url]
 [![GitHub last commit][commit-image]][commit-url]
-[![Travis CI][travis-image]][travis-url]
+[![Github workflow][ci-image]][ci-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 [![npm bundle size][npm-bundle-size-image]][npm-bundle-size-url]
 [![License][license-image]](LICENSE.md)
-<!-- [![Dependencies status][dependencies-image]][dependencies-url]
-[![Dev Dependencies status][devdependencies-image]][devdependencies-url] -->
 
 A tiny MVC framework freely inspired by Backbone.js.
 
@@ -166,19 +164,15 @@ A tiny MVC framework freely inspired by Backbone.js.
 [npm-image]: https://img.shields.io/npm/v/@mobilabs/spine.svg?logo=npm&logoColor=fff&label=NPM+package
 [release-image]: https://img.shields.io/github/release/jclo/spine.svg?include_prereleases
 [commit-image]: https://img.shields.io/github/last-commit/jclo/spine.svg?logo=github
-[travis-image]: https://img.shields.io/travis/com/jclo/spine.svg?logo=travis-ci&logoColor=fff
+[ci-image]: https://github.com/jclo/spine/actions/workflows/ci.yml/badge.svg
 [coveralls-image]: https://img.shields.io/coveralls/jclo/spine/master.svg?&logo=coveralls
-[dependencies-image]: https://david-dm.org/jclo/spine/status.svg?theme=shields.io
-[devdependencies-image]: https://david-dm.org/jclo/spine/dev-status.svg?theme=shields.io
 [npm-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@mobilabs/spine.svg
 [license-image]: https://img.shields.io/npm/l/@mobilabs/spine.svg
 
 [npm-url]: https://www.npmjs.com/package/@mobilabs/spine
 [release-url]: https://github.com/jclo/spine/tags
 [commit-url]: https://github.com/jclo/spine/commits/main
-[travis-url]: https://app.travis-ci.com/jclo/spine?branch=main
+[ci-url]: https://github.com/jclo/spine/actions/workflows/ci.yml
 [coveralls-url]: https://coveralls.io/github/jclo/spine?branch=master
-[dependencies-url]: https://david-dm.org/jclo/spine
-[devdependencies-url]: https://david-dm.org/jclo/spine?type=dev
-[license-url]: http://opensource.org/licenses/MIT
 [npm-bundle-size-url]: https://img.shields.io/bundlephobia/minzip/@mobilabs/spine
+[license-url]: http://opensource.org/licenses/MIT
