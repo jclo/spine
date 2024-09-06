@@ -30,6 +30,9 @@
  header .header-logo {
   width: 80px;
 }
+.mobilemenu .inner .mobilemenu-logo {
+  line-height: 40px;
+}
 
 
 

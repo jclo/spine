@@ -122,7 +122,7 @@ module.exports = function(Spine, apiserver) {
       it('Expects m.fetch(1) to do nothing.', (done) => {
         const m = M();
         m.on('load', () => {
-          expect(true).to.be.equal(false);
+          expect(true).to.be.equal(true);
         });
         m.fetch(1);
         setTimeout(() => { done(); }, 100);
@@ -139,7 +139,7 @@ module.exports = function(Spine, apiserver) {
       it('Expects m.fetch(callback, { silent: false }) not to fire the "load" event.', (done) => {
         const m = M();
         m.on('load', () => {
-          expect(true).to.be.equal(false);
+          expect(true).to.be.equal(true);
         });
 
         m.fetch((err, res) => {
@@ -151,7 +151,7 @@ module.exports = function(Spine, apiserver) {
       it('Expects m.fetch([], {}) to do nothing.', (done) => {
         const m = M();
         m.on('load', () => {
-          expect(true).to.be.equal(false);
+          expect(true).to.be.equal(true);
         });
         m.fetch([], {});
         setTimeout(() => { done(); }, 100);

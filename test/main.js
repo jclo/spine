@@ -4,9 +4,7 @@
 
 
 // -- Vendor Modules
-const { JSDOM } = require('jsdom')
-    // , fetch     = require('node-fetch')
-    ;
+const { JSDOM } = require('jsdom');
 
 
 // -- Local Modules
@@ -53,7 +51,6 @@ global.window = dom.window;
 global.root = dom.window;
 global.document = dom.window.document;
 global.navigator = { userAgent: 'node.js' };
-// global.fetch = fetch;
 
 // Nota:
 // If you want that 'display-coverage' shows the coverage files by files,

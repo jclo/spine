@@ -184,9 +184,13 @@ function _fetchServer(url, options, callback) /* istanbul ignore next */{
       callback(null, data);
     })
     .catch((error) => {
-      error.text()
-        .then((err) => { callback(err || { status, message: 'none!', statusText: 'none!' }); })
-      ;
+      if (error && error.text) {
+        error.text()
+          .then((err) => { callback(err || { status, message: 'none!', statusText: 'none!' }); })
+        ;
+      } else {
+        console.log(error);
+      }
     })
   ;
 }

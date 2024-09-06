@@ -1,5 +1,11 @@
 ### HEAD
 
+### 1.x.x (September 6, 2024)
+
+  * Updated the project with @mobilabs/es6kadoo v2.2.1 (improved build scripts),
+  * ...,
+
+
 ### 1.0.1 (January 25, 2024)
 
   * Updated the project with @mobilabs/es6kadoo v2.1 (Github Actions),

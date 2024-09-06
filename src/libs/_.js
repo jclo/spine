@@ -29,7 +29,7 @@
 
 
 // -- Vendor Modules
-import _ from '@mobilabs/overslash/_dist/lib/overslash-obj';
+import _ from '@mobilabs/overslash/_dist/lib/overslashobj';
 
 
 // -- Local Modules

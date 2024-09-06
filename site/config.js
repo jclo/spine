@@ -17,7 +17,7 @@ const FR          = 'fr'
     , IT          = 'it'
     , { base }    = themeconfig
     , { version } = require('../package.json')
-    , basepath    = '/spine/'
+    , basepath    = '/'
     ;
 
 
@@ -141,7 +141,7 @@ module.exports = {
     en: {
       top: {
         left: [
-          { text: 'Home', link: basepath },
+          // { text: 'Home', link: `${basepath}${EN}/#` },
         ],
         right: [
           {
@@ -163,7 +163,7 @@ module.exports = {
       ],
       mobile: [
         // { text: 'Home', link: `${basepath}${EN}/index.html` },
-        { text: 'Doc', link: `${basepath}${EN}/rview/introduction.html`, tag: 'doc' },
+        { text: 'Doc', link: `${basepath}${EN}/docs/introduction.html`, tag: 'doc' },
         { text: 'Contact', link: 'https://www.mobilabs.fr/en/contact.html' },
         { text: 'Legal', link: 'https://www.mobilabs.fr/en/legal.html' },
         {
@@ -178,6 +178,58 @@ module.exports = {
           ],
         },
         { text: '', link: '#switchtheme', lang: EN, icon: '<span id="switchthemesidemenu" class="theme-color-icons theme-icon" title="Switch between dark and light mode.">' },
+      ],
+    },
+
+    fr: {
+      top: {
+        left: [
+          //
+        ],
+        right: [
+          //
+        ],
+      },
+      bottom: [
+        //
+      ],
+      mobile: [
+        //
+      ],
+    },
+
+    de: {
+      top: {
+        left: [
+          //
+        ],
+        right: [
+          //
+        ],
+      },
+      bottom: [
+        //
+      ],
+      mobile: [
+        //
+      ],
+    },
+
+
+    it: {
+      top: {
+        left: [
+          //
+        ],
+        right: [
+          //
+        ],
+      },
+      bottom: [
+        //
+      ],
+      mobile: [
+        //
       ],
     },
   },
