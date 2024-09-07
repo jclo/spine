@@ -3,7 +3,7 @@
 ### 2.0.1 (September 7, 2024)
 
   * Added a clause to fetch to prevent an error being displayed during the client test,
-  * ...
+  * Release.
 
 
 ### 2.0.0 (September 7, 2024)

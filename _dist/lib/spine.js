@@ -1,5 +1,5 @@
 /*! ****************************************************************************
- * Spine v2.0.0
+ * Spine v2.0.1
  *
  * A tiny MVC framework inspired from Backbone.js.
  * (you can download it from npm or github repositories)
@@ -124,7 +124,7 @@
 
       // Useful to retrieve the library name and version when it is
       // embedded in another library as an object:
-      _library: { name: 'Spine', version: '2.0.0' },
+      _library: { name: 'Spine', version: '2.0.1' },
 
 
       // -- Private Static Methods ---------------------------------------------
@@ -271,7 +271,7 @@
 
     // Attaches constants to Spine that provide name and version of the lib.
     Spine.NAME = 'Spine';
-    Spine.VERSION = '2.0.0';
+    Spine.VERSION = '2.0.1';
 
 
     // -- Export
