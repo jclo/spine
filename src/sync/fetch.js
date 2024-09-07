@@ -169,6 +169,7 @@ function _getArgs(...args) /* istanbul ignore next */{
 //       }
 //     });
 // }
+/* eslint-disable no-console */
 function _fetchServer(url, options, callback) /* istanbul ignore next */{
   let status;
 
@@ -183,8 +184,19 @@ function _fetchServer(url, options, callback) /* istanbul ignore next */{
     .then((data) => {
       callback(null, data);
     })
+    // .catch((error) => {
+    //   if (error && error.text) {
+    //     error.text()
+    //       .then((err) => { callback(err || { status, message: 'none!', statusText: 'none!' }); })
+    //     ;
+    //   } else {
+    //     console.log(error);
+    //   }
+    // })
     .catch((error) => {
-      if (error && error.text) {
+      if (error && error.cause && error.cause.code === 'ERR_INVALID_URL' && error.cause.input === '/api/v1/users/me') {
+        console.log(`Testing....., code: "${error.cause.code}", input: "${error.cause.input}".`);
+      } else if (error && error.text) {
         error.text()
           .then((err) => { callback(err || { status, message: 'none!', statusText: 'none!' }); })
         ;
@@ -194,6 +206,7 @@ function _fetchServer(url, options, callback) /* istanbul ignore next */{
     })
   ;
 }
+/* eslint-enable no-console */
 
 /**
  * Fetches data.
