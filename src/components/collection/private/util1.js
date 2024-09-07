@@ -110,57 +110,6 @@ function _getArgs(...args) {
  * @since 0.0.0
  */
 function _add(col, /* models */items, options) {
-  // const ids   = col._ids
-  //     , cids  = col._cids
-  //     , Model = col.model
-  //     ;
-  //
-  // let nmodels;
-  // if (_.isLiteralObject(models)) {
-  //   nmodels = [models];
-  // } else if (_.isArray(models)) {
-  //   nmodels = models;
-  // } else {
-  //   nmodels = [];
-  // }
-  //
-  // const out = [];
-  // let m;
-  // let mo;
-  // let cm;
-  // let attrs;
-  // for (let i = 0; i < nmodels.length; i++) {
-  //   if (_.isLiteralObject(nmodels[i]) && !ids.includes(nmodels[i].id)) {
-  //     if (nmodels[i].id) ids.push(nmodels[i].id);
-  //     m = Model(nmodels[i], { parse: options && options.parse });
-  //     m.cid = `c${cids.length + 1}`;
-  //     cids.push(m.cid);
-  //     col._models.push(m);
-  //     cm = _.clone(m);
-  //     out.push(cm);
-  //     if (!options || !options.silent) col.fire('add', cm);
-  //   } else if (_.isLiteralObject(nmodels[i]) && ids.includes(nmodels[i].id)) {
-  //     // The model already exists, we update its attributes with
-  //     // the new passed-in:
-  //     m = Model(nmodels[i], { parse: options && options.parse }).getAll();
-  //     attrs = Object.keys(m);
-  //     mo = col.get(nmodels[i].id);
-  //     for (let j = 0; j < attrs.length; j++) {
-  //       mo._attributes[attrs[j]] = m[attrs[j]];
-  //     }
-  //     cm = _.clone(mo);
-  //     out.push(cm);
-  //     if (!options || !options.silent) col.fire('add', cm);
-  //   }
-  // }
-  // if (!options || !options.silent) col.fire('addcomplete', out);
-  // return out;
-
-  // This algorithm has been reworked to create the model before any
-  // operation and thus take care of the model.parse processing. For
-  // instance if the server use _id instead of id (mongodb), model.parse
-  // could create an id that duplicates _id and now we can register it
-  // in collectiion._ids.
   const ids   = col._ids
       , cids  = col._cids
       , Model = col.model
@@ -187,7 +136,7 @@ function _add(col, /* models */items, options) {
   for (let i = 0; i < childs.length; i++) {
     if (_.isLiteralObject(childs[i])) {
       model = Model(childs[i], { parse: options && options.parse });
-      id = model.get('id');
+      id = model.$get('id');
       if (!ids.includes(id)) {
         if (id) {
           ids.push(id);
@@ -198,22 +147,22 @@ function _add(col, /* models */items, options) {
         clomodel = _.clone(model);
         out.push(clomodel);
         if (!options || !options.silent) {
-          col.fire('add', clomodel);
+          col.$fire('add', clomodel);
         }
       } else {
-        attrs = Object.keys(model.getAll());
-        mo = col.get(model.get('id'));
+        attrs = Object.keys(model.$getAll());
+        mo = col.$get(model.$get('id'));
         for (let j = 0; j < attrs.length; j++) {
           mo._attributes[attrs[j]] = model._attributes[attrs[j]];
         }
         cm = _.clone(mo);
         out.push(cm);
-        if (!options || !options.silent) col.fire('add', cm);
+        if (!options || !options.silent) col.$fire('add', cm);
       }
     }
   }
 
-  if (!options || !options.silent) col.fire('addcomplete', out);
+  if (!options || !options.silent) col.$fire('addcomplete', out);
   return out;
 }
 
@@ -233,7 +182,7 @@ function _rm(models, id, cids, ids) {
   if (cids.indexOf(id) === -1 && ids.indexOf(id) === -1) return null;
 
   for (let i = 0; i < models.length; i++) {
-    if (models[i].cid === id || models[i].get('id') === id) {
+    if (models[i].cid === id || models[i].$get('id') === id) {
       let index = cids.indexOf(models[i].cid);
       if (index > -1) cids.splice(index, 1);
       index = ids.indexOf(id);
@@ -283,10 +232,10 @@ function _remove(col, models, options) {
     }
     if (m) {
       out.push(m);
-      if (!options || !options.silent) col.fire('remove', m);
+      if (!options || !options.silent) col.$fire('remove', m);
     }
   }
-  if (!options || !options.silent) col.fire('removecomplete', out);
+  if (!options || !options.silent) col.$fire('removecomplete', out);
   return out;
 }
 
@@ -326,8 +275,8 @@ function _fetch(col, ...args) {
       if (callback) callback(err);
       return;
     }
-    const out = col.add(data, { silent: true, parse: options.parse });
-    if (!options.silent) col.fire('load', out);
+    const out = col.$add(data, { silent: true, parse: options.parse });
+    if (!options.silent) col.$fire('load', out);
     if (callback) {
       callback(null, out);
     }

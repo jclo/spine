@@ -1,8 +1,9 @@
 ### HEAD
 
-### 1.x.x (September 6, 2024)
+### 1.x.x (September 7, 2024)
 
   * Updated the project with @mobilabs/es6kadoo v2.2.1 (improved build scripts),
+  * Added a $ prefix to Collection/Model/View/Router public methods,
   * ...,
 
 

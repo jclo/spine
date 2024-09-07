@@ -22,7 +22,7 @@ const should     = require('chai').should()
 // -- Main
 module.exports = function(Spine, apiserver) {
   describe('Test Spine.Collection object methods (next):', () => {
-    describe('Test length method:', () => {
+    describe('Test $length method:', () => {
       const C = Spine.Collection({ url: '' });
       const c = C([{ id: 1, a: 1, b: 2 }, { id: 2, c: 3, d: 4 }]);
 
@@ -31,7 +31,7 @@ module.exports = function(Spine, apiserver) {
       });
 
       it('Expects this collection to own 2 models.', () => {
-        expect(c.length()).to.be.a('number').that.is.equal(2);
+        expect(c.$length()).to.be.a('number').that.is.equal(2);
       });
     });
   });

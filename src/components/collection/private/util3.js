@@ -133,22 +133,22 @@ function _save(col, url, ...args) {
       // Update the models that exist in the collection:
       for (let i = 0; i < data.length; i++) {
         if (data[i].id) {
-          m = col.get(data[i].id);
+          m = col.$get(data[i].id);
           if (m) {
             keys = Object.keys(data[i]);
             for (let j = 0; j < keys.length; j++) {
               if (keys[j] !== 'id') {
-                m.set(keys[j], data[i][keys[j]]);
+                m.$set(keys[j], data[i][keys[j]]);
               }
             }
           }
         }
       }
-      if (!options.silent) col.fire('save', data);
+      if (!options.silent) col.$fire('save', data);
       if (callback) callback(null, data);
       return;
     }
-    if (!options.silent) col.fire('save', []);
+    if (!options.silent) col.$fire('save', []);
     if (callback) callback(null, []);
   });
 }

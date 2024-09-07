@@ -178,7 +178,7 @@ function _route() {
 
   if (this._trigger) {
     // fn.bind(this)();
-    this.execute(fn, params, route, url);
+    this.$execute(fn, params, route, url);
   } else {
     this._trigger = true;
   }

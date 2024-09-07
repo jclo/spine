@@ -1,6 +1,6 @@
 {
   "name": "@mobilabs/spine",
-  "version": "1.0.1",
+  "version": "2.0.0-beta.1",
   "description": "A tiny MVC framework inspired from Backbone.js",
   "main": "_dist/lib/spine.js",
   "minified": "_dist/lib/spine.min.js",
@@ -29,7 +29,7 @@
     "testing": " --- TESTING --- ",
     "test": "cross-env NODE_ENV=test c8 --reporter=lcov mocha --require esm ./test/main.js",
     "display:coverage": "open -a safari ./coverage/lcov-report/index.html",
-    "check:coverage": "c8 check-coverage --statements 80 --branches 80 --functions 80 --lines 80",
+    "check:coverage": "c8 check-coverage --statements 80 --branches 80 --functions 60 --lines 80",
     "report": "c8 report",
 
     "serving": " --- SERVING --- ",

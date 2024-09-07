@@ -32,11 +32,11 @@
  *
  *
  * Public Methods:
- *  . on                          listens for an event,
- *  . one                         listens for an event once,
- *  . off                         stops Listening the passed-in event,
- *  . fire                        fires an event,
- *  . trigger                     fires an event,
+ *  . $on                         listens for an event,
+ *  . $one                        listens for an event once,
+ *  . $off                        stops Listening the passed-in event,
+ *  . $fire                       fires an event,
+ *  . $trigger                    fires an event,
  *
  *
  *
@@ -53,12 +53,17 @@
 
 // -- Vendor Modules
 import Messenger from '@mobilabs/messenger';
+import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
+import config from '../../config';
 
 
 // -- Local Constants
+const { level } = config.logger
+    , log       = KZlog('Spine', level, false)
+    ;
 
 
 // -- Local Variables
@@ -139,9 +144,13 @@ const methods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  on(event, handler) {
+  $on(event, handler) {
     this._mess.subscribe(event, handler);
     return this;
+  },
+  on(event, handler) {
+    log.warn('on method is deprecated, use $on instead!');
+    return this.$on(event, handler);
   },
 
   /**
@@ -154,9 +163,13 @@ const methods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  one(event, handler) {
+  $one(event, handler) {
     this._mess.subscribeOnce(event, handler);
     return this;
+  },
+  one(event, handler) {
+    log.warn('one method is deprecated, use $one instead!');
+    return this.$one(event, handler);
   },
 
   /**
@@ -169,24 +182,13 @@ const methods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  off(event, handler) {
+  $off(event, handler) {
     this._mess.unsubscribe(event, handler);
     return this;
   },
-
-  /**
-   * Fires an event.
-   *
-   * @method (arg1, arg2)
-   * @public
-   * @param {String}        the message,
-   * @param {Object}        the payload to send to the listeners,
-   * @returns {Object}      returns this or null,
-   * @since 0.0.0
-   */
-  fire(event, payload) {
-    this._mess.publish(event, payload);
-    return this;
+  off(event, handler) {
+    log.warn('off method is deprecated, use $off instead!');
+    return this.$off(event, handler);
   },
 
   /**
@@ -199,9 +201,32 @@ const methods = {
    * @returns {Object}      returns this or null,
    * @since 0.0.0
    */
-  trigger(event, payload) {
-    this.fire(event, payload);
+  $fire(event, payload) {
+    this._mess.publish(event, payload);
     return this;
+  },
+  fire(event, payload) {
+    log.warn('fire method is deprecated, use $fire instead!');
+    return this.$fire(event, payload);
+  },
+
+  /**
+   * Fires an event.
+   *
+   * @method (arg1, arg2)
+   * @public
+   * @param {String}        the message,
+   * @param {Object}        the payload to send to the listeners,
+   * @returns {Object}      returns this or null,
+   * @since 0.0.0
+   */
+  $trigger(event, payload) {
+    this.$fire(event, payload);
+    return this;
+  },
+  trigger(event, payload) {
+    log.warn('trigger method is deprecated, use $trigger instead!');
+    return this.$trigger(event, payload);
   },
 };
 

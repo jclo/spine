@@ -152,7 +152,7 @@ function _delete(col, ...args) {
 
   // Quick return if the list is empty:
   if (list.length === 0) {
-    if (!options.silent) col.fire('delete', []);
+    if (!options.silent) col.$fire('delete', []);
     if (callback) callback(null, []);
     return;
   }
@@ -184,8 +184,8 @@ function _delete(col, ...args) {
       });
     }
 
-    const rmod = col.remove(ids, { silent: true });
-    if (!options.silent) col.fire('delete', rmod);
+    const rmod = col.$remove(ids, { silent: true });
+    if (!options.silent) col.$fire('delete', rmod);
     if (callback) callback(null, rmod);
   });
 }

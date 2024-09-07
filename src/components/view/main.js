@@ -16,13 +16,15 @@
  *
  *
  * Private Methods:
+ *  . _intInitialize              checks if it needs to use $initialize or initialize,
+ *  . _intListen                  checks if it needs to use $listen or listen,
  *  . _init                       makes init when the object is constructed,
  *
  *
  * Empty Public Methods:
- *  . initialize                  makes the initializations,
- *  . listen                      listens for events,
- *  . render                      renders the View in the DOM,
+ *  . $initialize                 makes the initializations,
+ *  . $listen                     listens for events,
+ *  . $render                     renders the View in the DOM,
  *
  *
  * Public Methods:
@@ -42,14 +44,19 @@
 
 
 // -- Vendor Modules
+import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
+import config from '../../config';
 import _ from '../../libs/_';
 import Generic from '../generic/main';
 
 
 // -- Local Constants
+const { level } = config.logger
+    , log       = KZlog('Spine', level, false)
+    ;
 
 
 // -- Local Variables
@@ -77,8 +84,8 @@ const View = function(methods) {
   const Child = function() {
     if (this instanceof Child) {
       Generic.Construct.apply(this, args);
-      this.initialize.apply(this, args);
-      this.listen.apply(this);
+      this._intInitialize.apply(this, args);
+      this._intListen.apply(this);
       return this;
     }
     args = arguments;
@@ -102,6 +109,44 @@ const View = function(methods) {
 vmethods = {
 
   // -- Private Methods ----------------------------------------------------
+
+  /**
+   * Checks if it needs to use $initialize or the deprecated initialize method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intInitialize(...args) {
+    if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())
+    ) {
+      log.warn('initialize method is deprecated, use $initialize instead!');
+      this.initialize(...args);
+      return;
+    }
+    this.$initialize(...args);
+  },
+
+  /**
+   * Checks if it needs to use $listen or the deprecated listen method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intListen() {
+    if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())
+    ) {
+      log.warn('listen method is deprecated, use $listen instead!');
+      this.listen();
+      return;
+    }
+    this.$listen();
+  },
 
   /**
    * Makes initializations when the object is constructed.
@@ -129,7 +174,8 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  initialize() {
+  initialize() {},
+  $initialize() {
     return this;
   },
 
@@ -143,7 +189,8 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  listen() {
+  listen() {},
+  $listen() {
     return this;
   },
 
@@ -157,7 +204,8 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  render() {
+  render() {},
+  $render() {
     return this;
   },
 

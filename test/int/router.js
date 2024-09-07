@@ -15,7 +15,7 @@ const should     = require('chai').should()
 
 // -- Local Constants
 const OWN_PROPERTIES = 4
-    , INH_PROPERTIES = 14
+    , INH_PROPERTIES = 27
     ;
 
 
@@ -69,11 +69,13 @@ module.exports = function(Spine) {
 
     describe('Check Spine.Router()() inherited properties:', () => {
       // [
-      //   '_ginit', '_init', 'on', 'one', 'off', 'fire', 'trigger', 'initialize',
-      //   'listen', 'execute', 'navigate', 'getLastRoute', 'stop', 'constructor'
+      //   '_ginit', '_init', '$on', 'on', '$one', 'one', '$off', 'off', '$fire', 'fire',
+      //   '$trigger', 'trigger', '_intInitialize', '_intListen', 'initialize', '$initialize',
+      //   'listen', '$listen', '$execute', 'execute', '$navigate', 'navigate', '$getLastRoute',
+      //   'getLastRoute', '$stop', 'stop', 'constructor'
       // ]
 
-      it('Expects Spine.Router()() to inherit 13 properties.', () => {
+      it(`Expects Spine.Router()() to inherit ${INH_PROPERTIES} properties.`, () => {
         const io = Object.getPrototypeOf(R());
         expect(Object.getOwnPropertyNames(io)).to.be.an('array').that.has.lengthOf(INH_PROPERTIES);
       });
@@ -90,48 +92,48 @@ module.exports = function(Spine) {
         expect(R().constructor).to.be.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "initialize" that is a function.', () => {
-        expect(R()).to.have.property('initialize').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$initialize" that is a function.', () => {
+        expect(R()).to.have.property('$initialize').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "listen" that is a function.', () => {
-        expect(R()).to.have.property('listen').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$listen" that is a function.', () => {
+        expect(R()).to.have.property('$listen').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "execute" that is a function.', () => {
-        expect(R()).to.have.property('execute').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$execute" that is a function.', () => {
+        expect(R()).to.have.property('$execute').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "navigate" that is a function.', () => {
-        expect(R()).to.have.property('navigate').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$navigate" that is a function.', () => {
+        expect(R()).to.have.property('$navigate').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "getLastRoute" that is a function.', () => {
-        expect(R()).to.have.property('getLastRoute').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$getLastRoute" that is a function.', () => {
+        expect(R()).to.have.property('$getLastRoute').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "stop" that is a function.', () => {
-        expect(R()).to.have.property('stop').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$stop" that is a function.', () => {
+        expect(R()).to.have.property('$stop').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "on" that is a function.', () => {
-        expect(R()).to.have.property('on').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$on" that is a function.', () => {
+        expect(R()).to.have.property('$on').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "one" that is a function.', () => {
-        expect(R()).to.have.property('one').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$one" that is a function.', () => {
+        expect(R()).to.have.property('$one').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "off" that is a function.', () => {
-        expect(R()).to.have.property('off').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$off" that is a function.', () => {
+        expect(R()).to.have.property('$off').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "fire" that is a function.', () => {
-        expect(R()).to.have.property('fire').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$fire" that is a function.', () => {
+        expect(R()).to.have.property('$fire').that.is.a('function');
       });
 
-      it('Expects Spine.Router()() to inherit of "trigger" that is a function.', () => {
-        expect(R()).to.have.property('trigger').that.is.a('function');
+      it('Expects Spine.Router()() to inherit of "$trigger" that is a function.', () => {
+        expect(R()).to.have.property('$trigger').that.is.a('function');
       });
     });
 
@@ -142,9 +144,15 @@ module.exports = function(Spine) {
         });
       });
 
-      describe('Test the method initialize:', () => {
-        it('Expects router.initialize() to return "this".', () => {
-          expect(R().initialize()).to.be.an('object');
+      describe('Test the $initialize method:', () => {
+        it('Expects router.$initialize() to return "this".', () => {
+          expect(R().$initialize()).to.be.an('object');
+        });
+      });
+
+      describe('Test the $listen method:', () => {
+        it('Expects router.$listen() to return "this".', () => {
+          expect(R().$listen()).to.be.an('object');
         });
       });
     });

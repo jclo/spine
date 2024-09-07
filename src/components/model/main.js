@@ -16,26 +16,29 @@
  *
  *
  * Private Methods:
+ *  . _intInitialize              checks if it needs to use $initialize or initialize,
+ *  . _intListen                  checks if it needs to use $listen or listen,
+ *  . _intParse                   checks if it needs to use $parse or parse,
  *  . _init                       makes private init. after creation,
  *  . _parse                      parses the received object.
  *
  *
  * Empty Public Methods:
- *  . initialize                  makes extra initializations,
- *  . listen                      listens for events,
- *  . parse                       parses the downloaded object or bypass,
+ *  . $initialize                 makes extra initializations,
+ *  . $listen                     listens for events,
+ *  . $parse                      parses the downloaded object or bypass,
  *
  *
  * Public Methods:
- *  . get                         returns the value of the req. model property,
- *  . getAll                      returns an object with all the key/values,
- *  . set                         sets or updates model properties,
- *  . remove                      removes model property(ies),
- *  . has                         checks if the model has the property,
- *  . fetch                       retrieves a model from the server,
- *  . save                        sends a model to the server,
- *  . delete                      deletes a model from the server,
- *  . urify                       extends url with query parameters,
+ *  . $get                        returns the value of the req. model property,
+ *  . $getAll                     returns an object with all the key/values,
+ *  . $set                        sets or updates model properties,
+ *  . $remove                     removes model property(ies),
+ *  . $has                        checks if the model has the property,
+ *  . $fetch                      retrieves a model from the server,
+ *  . $save                       sends a model to the server,
+ *  . $delete                     deletes a model from the server,
+ *  . $urify                      extends url with query parameters,
  *
  *
  *
@@ -51,9 +54,11 @@
 
 
 // -- Vendor Modules
+import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
+import config from '../../config';
 import _ from '../../libs/_';
 import Generic from '../generic/main';
 import U from '../../utils/util1';
@@ -62,6 +67,9 @@ import U1 from './private/util';
 
 
 // -- Local Constants
+const { level } = config.logger
+    , log       = KZlog('Spine', level, false)
+    ;
 
 
 // -- Local Variables
@@ -87,8 +95,8 @@ const Model = function(methods) {
   const Child = function() {
     if (this instanceof Child) {
       Generic.Construct.apply(this, args);
-      this.initialize.apply(this, args);
-      this.listen.apply(this);
+      this._intInitialize.apply(this, args);
+      this._intListen.apply(this);
       return this;
     }
     args = arguments;
@@ -114,6 +122,62 @@ const Model = function(methods) {
 mmethods = {
 
   // -- Private Methods ----------------------------------------------------
+
+  /**
+   * Checks if it needs to use $initialize or the deprecated initialize method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intInitialize(...args) {
+    if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())
+    ) {
+      log.warn('initialize method is deprecated, use $initialize instead!');
+      this.initialize(...args);
+      return;
+    }
+    this.$initialize(...args);
+  },
+
+  /**
+   * Checks if it needs to use $listen or the deprecated listen method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intListen() {
+    if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())
+    ) {
+      log.warn('listen method is deprecated, use $listen instead!');
+      this.listen();
+      return;
+    }
+    this.$listen();
+  },
+
+  /**
+   * Checks if it needs to use $parse or the deprecated parse method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intParse(...args) {
+    if (!/^parse\((.*)\)[^{]+\{\s*\}/m.test(this.parse.toString())
+    ) {
+      log.warn('parse method is deprecated, use $parse instead!');
+      return this.parse(...args);
+    }
+    return this.$parse(...args);
+  },
 
   /**
    * Makes initializations when the object is constructed.
@@ -145,7 +209,7 @@ mmethods = {
   /* eslint-disable no-restricted-syntax */
   _parse(data, options) {
     let obj = data || {};
-    obj = options && options.parse ? this.parse(obj) : obj;
+    obj = options && options.parse ? this._intParse(obj) : obj;
     for (const item in this.defaults) {
       if (!obj[item]) {
         obj[item] = this.defaults[item];
@@ -168,7 +232,8 @@ mmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  initialize() {
+  initialize() {},
+  $initialize() {
     return this;
   },
 
@@ -182,7 +247,8 @@ mmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  listen() {
+  listen() {},
+  $listen() {
     return this;
   },
 
@@ -196,7 +262,8 @@ mmethods = {
    * @returns {String}      returns the downloaded file,
    * @since 0.0.0
    */
-  parse(attributes) {
+  parse() {},
+  $parse(attributes) {
     return attributes;
   },
 
@@ -213,8 +280,12 @@ mmethods = {
    * @returns {...}         returns the value of this property,
    * @since 0.0.0
    */
-  get(prop) {
+  $get(prop) {
     return typeof prop === 'string' ? this._attributes[prop] : null;
+  },
+  get(prop) {
+    log.warn('get method is deprecated, use $get instead!');
+    return this.$get(prop);
   },
 
   /**
@@ -227,8 +298,12 @@ mmethods = {
    * @returns {Object}      returns the model properties,
    * @since 0.0.0
    */
-  getAll() {
+  $getAll() {
     return { ...this._attributes };
+  },
+  getAll() {
+    log.warn('getAll method is deprecated, use $getAll instead!');
+    return this.$getAll();
   },
 
   /**
@@ -244,8 +319,12 @@ mmethods = {
    * @returns {Object/.}    the options or the property value,
    * @since 0.0.0
    */
-  set(...args) {
+  $set(...args) {
     return U1.set(this, ...args);
+  },
+  set(...args) {
+    log.warn('set method is deprecated, use $set instead!');
+    return this.$set(...args);
   },
 
   /**
@@ -266,8 +345,12 @@ mmethods = {
    * @returns {Object}      returns the removed properties and their values,
    * @since 0.0.0
    */
-  remove(...args) {
+  $remove(...args) {
     return U1.remove(this, ...args);
+  },
+  remove(...args) {
+    log.warn('remove method is deprecated, use $remove instead!');
+    return this.$remove(...args);
   },
 
   /**
@@ -280,11 +363,15 @@ mmethods = {
    * @returns {Boolean}     returns true if the property exist otherwise false,
    * @since 0.0.0
    */
-  has(prop) {
+  $has(prop) {
     if (typeof prop === 'string' && prop in this._attributes) {
       return true;
     }
     return false;
+  },
+  has(prop) {
+    log.warn('has method is deprecated, use $has instead!');
+    return this.$has(prop);
   },
 
   /**
@@ -301,9 +388,13 @@ mmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  fetch(...args) {
+  $fetch(...args) {
     F.fetch(this, this.url, ...args);
     return this;
+  },
+  fetch(...args) {
+    log.warn('fetch method is deprecated, use $fetch instead!');
+    return this.$fetch(...args);
   },
 
   /**
@@ -321,9 +412,13 @@ mmethods = {
    * @returns {Object}      this,
    * @since 0.0.0
    */
-  save(...args) {
+  $save(...args) {
     F.save(this, this.url, ...args);
     return this;
+  },
+  save(...args) {
+    log.warn('save method is deprecated, use $save instead!');
+    return this.$save(...args);
   },
 
   /**
@@ -340,9 +435,13 @@ mmethods = {
    * @returns {Object}      this,
    * @since 0.0.0
    */
-  delete(...args) {
+  $delete(...args) {
     F.delete(this, this.url, ...args);
     return this;
+  },
+  delete(...args) {
+    log.warn('delete method is deprecated, use $delete instead!');
+    return this.$delete(...args);
   },
 
   /**
@@ -355,8 +454,12 @@ mmethods = {
    * @returns {String}      returns the URI or null,
    * @since 0.0.0
    */
-  urify(...args) {
+  $urify(...args) {
     return U.urify(...args);
+  },
+  urify(...args) {
+    log.warn('urify method is deprecated, use $urify instead!');
+    return this.$urify(...args);
   },
 };
 

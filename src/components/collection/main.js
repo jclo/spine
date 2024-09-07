@@ -16,28 +16,30 @@
  *
  *
  * Private Methods:
+ *  . _intInitialize              checks if it needs to use $initialize or initialize,
+ *  . _intListen                  checks if it needs to use $listen or listen,
  *  . _init                       makes private init. after creation,
  *
  *
  * Empty Public Methods:
- *  . initialize                  makes extra initializations,
- *  . listen                      listens for events,
+ *  . $initialize                 makes extra initializations,
+ *  . $listen                     listens for events,
  *
  *
  * Public Methods:
- *  . get                         gets a model from its cid or id,
- *  . each                        returns the models one by one,
- *  . next                        returns the next model from the given model,
- *  . previous                    returns the previous model from the given model,
- *  . length                      returns the number of models in the collection,
- *  . set                         to be done .........,
- *  . empty                       deletes the collection,
- *  . add                         adds one or many objects to the collection,
- *  . remove                      removes model(s) from the collection,
- *  . fetch                       retrieves new models from the server,
- *  . save                        adds or updates a set of model(s) on the server,
- *  . delete                      deletes a set of models from server and collection,
- *  . urify                       extends url with query parameters,
+ *  . $get                        gets a model from its cid or id,
+ *  . $each                       returns the models one by one,
+ *  . $next                       returns the next model from the given model,
+ *  . $previous                   returns the previous model from the given model,
+ *  . $length                     returns the number of models in the collection,
+ *  . $set                        to be done .........,
+ *  . $empty                      deletes the collection,
+ *  . $add                        adds one or many objects to the collection,
+ *  . $remove                     removes model(s) from the collection,
+ *  . $fetch                      retrieves new models from the server,
+ *  . $save                       adds or updates a set of model(s) on the server,
+ *  . $delete                     deletes a set of models from server and collection,
+ *  . $urify                      extends url with query parameters,
  *
  *
  *
@@ -53,9 +55,11 @@
 
 
 // -- Vendor Modules
+import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
+import config from '../../config';
 import _ from '../../libs/_';
 import Generic from '../generic/main';
 import M from '../model/main';
@@ -66,6 +70,9 @@ import U3 from './private/util3';
 
 
 // -- Local Constants
+const { level } = config.logger
+    , log       = KZlog('Spine', level, false)
+    ;
 
 
 // -- Local Variables
@@ -91,8 +98,8 @@ const Collection = function(methods) {
   const Child = function() {
     if (this instanceof Child) {
       Generic.Construct.apply(this, args);
-      this.initialize.apply(this, args);
-      this.listen.apply(this);
+      this._intInitialize.apply(this, args);
+      this._intListen.apply(this);
       return this;
     }
     args = arguments;
@@ -120,6 +127,44 @@ cmethods = {
   // -- Private Methods ----------------------------------------------------
 
   /**
+   * Checks if it needs to use $initialize or the deprecated initialize method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intInitialize(...args) {
+    if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())
+    ) {
+      log.warn('initialize method is deprecated, use $initialize instead!');
+      this.initialize(...args);
+      return;
+    }
+    this.$initialize(...args);
+  },
+
+  /**
+   * Checks if it needs to use $listen or the deprecated listen method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intListen() {
+    if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())
+    ) {
+      log.warn('listen method is deprecated, use $listen instead!');
+      this.listen();
+      return;
+    }
+    this.$listen();
+  },
+
+  /**
    * Makes initializations when the object is constructed.
    *
    * @method ([arg0])
@@ -134,7 +179,7 @@ cmethods = {
     this._models = [];
     this.url = this.url || null;
     this.model = this.model || M.Model();
-    this.add(args[0]);
+    this.$add(args[0]);
     return this;
   },
 
@@ -151,7 +196,8 @@ cmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  initialize() {
+  initialize() {},
+  $initialize() {
     return this;
   },
 
@@ -165,7 +211,8 @@ cmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  listen() {
+  listen() {},
+  $listen() {
     return this;
   },
 
@@ -182,8 +229,12 @@ cmethods = {
    * @returns {Object}      returns the found model or null,
    * @since 0.0.0
    */
-  get(id) {
+  $get(id) {
     return U2.get(this, id);
+  },
+  get(id) {
+    log.warn('get method is deprecated, use $get instead!');
+    return this.$get(id);
   },
 
   /**
@@ -196,11 +247,15 @@ cmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  each(callback) {
+  $each(callback) {
     for (let i = 0; i < this._models.length; i++) {
       callback(this._models[i], i);
     }
     return this;
+  },
+  each(callback) {
+    log.warn('each method is deprecated, use $each instead!');
+    return this.$each(callback);
   },
 
   /**
@@ -213,8 +268,12 @@ cmethods = {
    * @returns {Object}      returns the found model or null,
    * @since 0.0.0
    */
-  next(id) {
+  $next(id) {
     return U2.next(this, id);
+  },
+  next(id) {
+    log.warn('next method is deprecated, use $next instead!');
+    return this.$next(id);
   },
 
   /**
@@ -227,8 +286,12 @@ cmethods = {
    * @returns {Object}      returns the found model or null,
    * @since 0.0.0
    */
-  previous(id) {
+  $previous(id) {
     return U2.previous(this, id);
+  },
+  previous(id) {
+    log.warn('previous method is deprecated, use $previous instead!');
+    return this.$previous(id);
   },
 
   /**
@@ -241,8 +304,12 @@ cmethods = {
    * @returns {Number}      returns the collection length,
    * @since 0.0.0
    */
-  length() {
+  $length() {
     return this._models.length;
+  },
+  length() {
+    log.warn('length method is deprecated, use $length instead!');
+    return this.$length();
   },
 
   /**
@@ -260,11 +327,15 @@ cmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  empty() {
+  $empty() {
     this._ids = [];
     this._cids = [];
     this._models = [];
     return this;
+  },
+  empty() {
+    log.warn('empty method is deprecated, use $empty instead!');
+    return this.$empty();
   },
 
   /**
@@ -293,8 +364,12 @@ cmethods = {
    * @returns {Array}       returns the added models,
    * @since 0.0.0
    */
-  add(models, options) {
+  $add(models, options) {
     return U1.add(this, models, options);
+  },
+  add(models, options) {
+    log.warn('add method is deprecated, use $add instead!');
+    return this.$add(models, options);
   },
 
   /**
@@ -316,8 +391,12 @@ cmethods = {
    * @returns {Array}       returns the removed models,
    * @since 0.0.0
    */
-  remove(arg, options) {
+  $remove(arg, options) {
     return U1.remove(this, arg, options);
+  },
+  remove(arg, options) {
+    log.warn('remove method is deprecated, use $remove instead!');
+    return this.$remove(arg, options);
   },
 
   /**
@@ -336,9 +415,13 @@ cmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  fetch(...args) {
+  $fetch(...args) {
     U1.fetch(this, ...args);
     return this;
+  },
+  fetch(...args) {
+    log.warn('fetch method is deprecated, use $fetch instead!');
+    return this.$fetch(...args);
   },
 
   /**
@@ -357,9 +440,13 @@ cmethods = {
    * @returns {Object}      this,
    * @since 0.0.0
    */
-  save(...args) {
+  $save(...args) {
     U3.save(this, this.url, ...args);
     return this;
+  },
+  save(...args) {
+    log.warn('save method is deprecated, use $save instead!');
+    return this.$save(...args);
   },
 
   /**
@@ -379,9 +466,13 @@ cmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  delete(...args) {
+  $delete(...args) {
     U2.delete(this, ...args);
     return this;
+  },
+  delete(...args) {
+    log.warn('delete method is deprecated, use $delete instead!');
+    return this.$delete(...args);
   },
 
   /**
@@ -394,8 +485,12 @@ cmethods = {
    * @returns {String}      returns the URI or null,
    * @since 0.0.0
    */
-  urify(...args) {
+  $urify(...args) {
     return U.urify(...args);
+  },
+  urify(...args) {
+    log.warn('urify method is deprecated, use $urify instead!');
+    return this.$urify(...args);
   },
 };
 

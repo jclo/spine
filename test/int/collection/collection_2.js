@@ -62,7 +62,7 @@ module.exports = function(Spine) {
     });
 
 
-    describe('Test get method:', () => {
+    describe('Test $get method:', () => {
       const C = Spine.Collection({ url: '' });
       const c = C([{ id: 1, a: 1, b: 2 }, { c: 3, d: 4 }]);
 
@@ -70,8 +70,8 @@ module.exports = function(Spine) {
         expect(c._models).to.be.an('array');
       });
 
-      it('Expects c.get("c1") to return the first model of the collection.', () => {
-        const m = c.get('c1');
+      it('Expects c.$get("c1") to return the first model of the collection.', () => {
+        const m = c.$get('c1');
         expect(m.cid).to.be.a('string').that.is.equal('c1');
         expect(Object.keys(m._attributes)).to.be.an('array').that.has.lengthOf(3);
         expect(m._attributes).to.own.property('id').to.be.is.a('number').that.is.equal(1);
@@ -79,8 +79,8 @@ module.exports = function(Spine) {
         expect(m._attributes).to.own.property('b').to.be.is.a('number').that.is.equal(2);
       });
 
-      it('Expects c.get(1) to return the first model of the collection.', () => {
-        const m = c.get(1);
+      it('Expects c.$get(1) to return the first model of the collection.', () => {
+        const m = c.$get(1);
         expect(m.cid).to.be.a('string').that.is.equal('c1');
         expect(Object.keys(m._attributes)).to.be.an('array').that.has.lengthOf(3);
         expect(m._attributes).to.own.property('id').to.be.is.a('number').that.is.equal(1);
@@ -88,34 +88,34 @@ module.exports = function(Spine) {
         expect(m._attributes).to.own.property('b').to.be.is.a('number').that.is.equal(2);
       });
 
-      it('Expects c.get(2) to return null.', () => {
-        expect(c.get(2)).to.be.a('null');
+      it('Expects c.$get(2) to return null.', () => {
+        expect(c.$get(2)).to.be.a('null');
       });
 
-      it('Expects c.get() to return null.', () => {
-        expect(c.get()).to.be.a('null');
+      it('Expects c.$get() to return null.', () => {
+        expect(c.$get()).to.be.a('null');
       });
     });
   });
 
-  describe('Test each method:', () => {
+  describe('Test $each method:', () => {
     const C = Spine.Collection({ url: '' });
     const c = C([{ id: 1, a: 1, b: 2 }, { id: 2, c: 3, d: 4 }]);
     const ceach = [];
-    c.each((m) => { ceach.push(m); });
+    c.$each((m) => { ceach.push(m); });
 
     it('Expects Spine.Collection()([{ id: 1, a: 1, b: 2 }, { id: 2, c: 3, d: 4 }]) to create a collection.', () => {
       expect(c._models).to.be.an('array');
     });
 
-    it('Expects c.each(...) to return a model at each iteration.', () => {
-      c.each((m) => {
+    it('Expects c.$each(...) to return a model at each iteration.', () => {
+      c.$each((m) => {
         expect(m).to.own.property('cid');
         expect(m).to.own.property('_attributes');
       });
     });
 
-    it('Expects c.each(...) to fill an array that contains all the models of the collection.', () => {
+    it('Expects c.$each(...) to fill an array that contains all the models of the collection.', () => {
       expect(ceach).to.be.an('array').that.has.lengthOf(2);
       expect(ceach[0]).to.own.property('cid').that.is.a('string').that.is.equal('c1');
       expect(ceach[0]._attributes).to.own.property('id').that.is.a('number').that.is.equal(1);
@@ -124,7 +124,7 @@ module.exports = function(Spine) {
     });
   });
 
-  describe('Test empty method:', () => {
+  describe('Test $empty method:', () => {
     const C = Spine.Collection({ url: '' });
     const c = C([{ id: 1, a: 1, b: 2 }, { id: 2, c: 3, d: 4 }]);
 
@@ -138,8 +138,8 @@ module.exports = function(Spine) {
       expect(c._models[0]).to.own.property('_attributes');
     });
 
-    it('Expects c.empty() to remove all the models from this collection.', () => {
-      c.empty();
+    it('Expects c.$empty() to remove all the models from this collection.', () => {
+      c.$empty();
       expect(c._models).to.be.an('array').that.has.a.lengthOf(0);
     });
   });

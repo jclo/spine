@@ -15,7 +15,7 @@ const should     = require('chai').should()
 
 // -- Local Constants
 const OWNPROPS = 1
-    , INPROPS  = 11
+    , INPROPS  = 21
     ;
 
 
@@ -56,10 +56,16 @@ module.exports = function(Spine) {
     });
 
     describe('Check Spine.View()() inherited properties:', () => {
-      it('Expects Spine.View()() to inherit 11 properties.', () => {
+      it(`Expects Spine.View()() to inherit ${INPROPS} properties.`, () => {
         const io = Object.getPrototypeOf(V());
         expect(Object.getOwnPropertyNames(io)).to.be.an('array').that.has.lengthOf(INPROPS);
       });
+
+      // [
+      //   '_ginit', '_init', '$on', 'on', '$one', 'one', '$off', 'off', '$fire', 'fire',
+      //   '$trigger', 'trigger', '_intInitialize', '_intListen', 'initialize', '$initialize',
+      //   'listen', '$listen', 'render', '$render', 'constructor'
+      // ]
 
       it('Expects Spine.View()() to inherit of "_ginit" that is a function.', () => {
         expect(V()._ginit).to.be.a('function');
@@ -73,37 +79,37 @@ module.exports = function(Spine) {
         expect(V().constructor).to.be.a('function');
       });
 
-      it('Expects Spine.View()() to inherit of "initialize" that is a function.', () => {
-        expect(V().initialize).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$initialize" that is a function.', () => {
+        expect(V().$initialize).to.be.a('function');
       });
 
-      it('Expects Spine.View()() to inherit of "listen" that is a function.', () => {
-        expect(V().listen).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$listen" that is a function.', () => {
+        expect(V().$listen).to.be.a('function');
       });
 
-      it('Expects Spine.View()() to inherit of "render" that is a function.', () => {
-        expect(V().render).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$render" that is a function.', () => {
+        expect(V().$render).to.be.a('function');
       });
 
 
-      it('Expects Spine.View()() to inherit of "off" that is a function.', () => {
-        expect(V().off).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$off" that is a function.', () => {
+        expect(V().$off).to.be.a('function');
       });
 
-      it('Expects Spine.View()() to inherit of "on" that is a function.', () => {
-        expect(V().on).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$on" that is a function.', () => {
+        expect(V().$on).to.be.a('function');
       });
 
-      it('Expects Spine.View()() to inherit of "one" that is a function.', () => {
-        expect(V().one).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$one" that is a function.', () => {
+        expect(V().$one).to.be.a('function');
       });
 
-      it('Expects Spine.View()() to inherit of "fire" that is a function.', () => {
-        expect(V().fire).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$fire" that is a function.', () => {
+        expect(V().$fire).to.be.a('function');
       });
 
-      it('Expects Spine.View()() to inherit of "trigger" that is a function.', () => {
-        expect(V().trigger).to.be.a('function');
+      it('Expects Spine.View()() to inherit of "$trigger" that is a function.', () => {
+        expect(V().$trigger).to.be.a('function');
       });
     });
 
@@ -111,15 +117,21 @@ module.exports = function(Spine) {
       const View = Spine.View();
       const view = View();
 
-      describe('Test the method initialize:', () => {
-        it('Expects view.initialize() to return "this".', () => {
-          expect(view.initialize()).to.be.an('object');
+      describe('Test the $initialize method:', () => {
+        it('Expects view.$initialize() to return "this".', () => {
+          expect(view.$initialize()).to.be.an('object');
         });
       });
 
-      describe('Test the method render:', () => {
-        it('Expects view.render() to return "this".', () => {
-          expect(view.render()).to.be.an('object');
+      describe('Test the $listen method:', () => {
+        it('Expects view.$listen() to return "this".', () => {
+          expect(view.$listen()).to.be.an('object');
+        });
+      });
+
+      describe('Test the $render method:', () => {
+        it('Expects view.$render() to return "this".', () => {
+          expect(view.$render()).to.be.an('object');
         });
       });
     });

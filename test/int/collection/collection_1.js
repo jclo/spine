@@ -15,7 +15,7 @@ const should     = require('chai').should()
 
 // -- Local Constants
 const OWN_PROPERTIES = 6
-    , INH_PROPERTIES = 22
+    , INH_PROPERTIES = 43
     ;
 
 
@@ -80,10 +80,14 @@ module.exports = function(Spine) {
 
   describe('Test Spine.Collection object inherited properties:', () => {
     // [
-    //  '_ginit', '_init', 'on', 'one', 'off', 'fire', 'trigger',
-    //  'initialize', 'listen', 'get', 'each', 'next', 'previous', 'length',
-    // 'empty', 'add', 'remove' 'fetch', 'save', 'delete', 'urify',
-    // 'constructor'
+    //   '_ginit', '_init', '$on', 'on', '$one', 'one',
+    //   '$off', 'off', '$fire', 'fire', '$trigger', 'trigger',
+    //   '_intInitialize', '_intListen', 'initialize', '$initialize', 'listen', '$listen',
+    //   '$get', 'get', '$each', 'each', '$next', 'next',
+    //   '$previous', 'previous', '$length', 'length', '$empty', 'empty',
+    //   '$add', 'add', '$remove', 'remove', '$fetch', 'fetch',
+    //   '$save', 'save', '$delete', 'delete', '$urify', 'urify',
+    //   'constructor'
     // ]
 
     const c = C();

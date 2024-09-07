@@ -16,19 +16,21 @@
  *
  *
  * Private Methods:
+ *  . _intInitialize              checks if it needs to use $initialize or initialize,
+ *  . _intListen                  checks if it needs to use $listen or listen,
  *  . _init                       makes init when the object is constructed,
  *
  *
  * Empty Public Methods:
- *  . initialize                  makes the initializations,
- *  . listen                      listens for bus messages,
+ *  . $initialize                 makes the initializations,
+ *  . $listen                     listens for bus messages,
  *
  *
  * Public Methods:
- *  . execute                     calls the matching route,
- *  . navigate                    updates the url or triggers a route,
- *  . getLastRoute                returns the latest route stored in the history,
- *  . stop                        stops the router to listen for hash changes,
+ *  . $execute                    calls the matching route,
+ *  . $navigate                   updates the url or triggers a route,
+ *  . $getLastRoute               returns the latest route stored in the history,
+ *  . $stop                       stops the router to listen for hash changes,
  *
  *
  *
@@ -44,9 +46,11 @@
 
 
 // -- Vendor Modules
+import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
+import config from '../../config';
 import _ from '../../libs/_';
 import Generic from '../generic/main';
 import History from '../history/main';
@@ -54,6 +58,9 @@ import Util from './util';
 
 
 // -- Local Constants
+const { level } = config.logger
+    , log       = KZlog('Spine', level, false)
+    ;
 
 
 // -- Local Variables
@@ -81,8 +88,8 @@ const Router = function(methods) {
   const Child = function() {
     if (this instanceof Child) {
       Generic.Construct.apply(this, args);
-      this.initialize.apply(this, args);
-      this.listen.apply(this);
+      this._intInitialize.apply(this, args);
+      this._intListen.apply(this);
       return this;
     }
     args = arguments;
@@ -106,6 +113,44 @@ const Router = function(methods) {
 vmethods = {
 
   // -- Private Methods ----------------------------------------------------
+
+  /**
+   * Checks if it needs to use $initialize or the deprecated initialize method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intInitialize(...args) {
+    if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())
+    ) {
+      log.warn('initialize method is deprecated, use $initialize instead!');
+      this.initialize(...args);
+      return;
+    }
+    this.$initialize(...args);
+  },
+
+  /**
+   * Checks if it needs to use $listen or the deprecated listen method.
+   *
+   * @method ()
+   * @private
+   * @param {}              -,
+   * @returns {}            -,
+   * @since 0.0.0
+   */
+  _intListen() {
+    if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())
+    ) {
+      log.warn('listen method is deprecated, use $listen instead!');
+      this.listen();
+      return;
+    }
+    this.$listen();
+  },
 
   /**
    * Makes initializations when the object is constructed.
@@ -137,7 +182,8 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  initialize() {
+  initialize() {},
+  $initialize() {
     return this;
   },
 
@@ -151,7 +197,8 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  listen() {
+  listen() {},
+  $listen() {
     return this;
   },
 
@@ -174,9 +221,13 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  execute(callback, ...args) {
+  $execute(callback, ...args) {
     if (callback) callback.apply(this, args);
     return this;
+  },
+  execute(callback, ...args) {
+    log.warn('execute method is deprecated, use $execute instead!');
+    return this.$execute(callback, ...args);
   },
 
   /**
@@ -200,12 +251,16 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  navigate(path, options) {
+  $navigate(path, options) {
     this._trigger = options && options.trigger;
     this._replace = options && options.replace;
     /* eslint-disable-next-line no-restricted-globals */
     location.hash = `#${path}`;
     return this;
+  },
+  navigate(path, options) {
+    log.warn('navigate method is deprecated, use $navigate instead!');
+    return this.$navigate(path, options);
   },
 
   /**
@@ -218,8 +273,12 @@ vmethods = {
    * @returns {String}      returns the route stored in the history,
    * @since 0.0.0
    */
-  getLastRoute() {
+  $getLastRoute() {
     return History.get();
+  },
+  getLastRoute() {
+    log.warn('getLastRoute method is deprecated, use $getLastRoute instead!');
+    return this.$getLastRoute();
   },
 
   /**
@@ -232,9 +291,13 @@ vmethods = {
    * @returns {Object}      returns this,
    * @since 0.0.0
    */
-  stop() {
+  $stop() {
     Util.stopListeningHashChange();
     return this;
+  },
+  stop() {
+    log.warn('stop method is deprecated, use $stop instead!');
+    return this.$stop();
   },
 };
 

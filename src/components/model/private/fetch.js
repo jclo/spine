@@ -179,7 +179,7 @@ function _fetch(model, url, ...args) {
       return;
     }
     model._attributes = model._parse(data, opts);
-    if (!opts.silent) model.fire('load', model._attributes);
+    if (!opts.silent) model.$fire('load', model._attributes);
     if (callback) {
       callback(null, model._attributes);
     }
@@ -218,7 +218,7 @@ function _save(model, url, ...args) {
     if (err) {
       if (callback) callback(err);
     } else {
-      if (!opts.silent) model.fire('save', res);
+      if (!opts.silent) model.$fire('save', res);
       if (callback) callback(err, res);
     }
   });
@@ -237,7 +237,7 @@ function _save(model, url, ...args) {
  */
 function _delete(model, url, ...args) {
   const [opts, callback] = _getArgs4FetchAndDelete(...args)
-      , id                  = model.get('id')
+      , id                  = model.$get('id')
       ;
 
   if (!id) {
@@ -263,7 +263,7 @@ function _delete(model, url, ...args) {
     if (err) {
       if (callback) callback(err);
     } else {
-      if (!opts.silent) model.fire('delete', res);
+      if (!opts.silent) model.$fire('delete', res);
       if (callback) callback(err, res);
     }
   });

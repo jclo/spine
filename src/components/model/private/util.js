@@ -173,10 +173,10 @@ function _remove(model, ...args) {
       o[item] = model._attributes[item];
       out[item] = o[item];
       delete model._attributes[item];
-      if (!options.silent) model.fire('remove:prop', o);
+      if (!options.silent) model.$fire('remove:prop', o);
     }
   });
-  if (!options.silent) model.fire('remove', out);
+  if (!options.silent) model.$fire('remove', out);
   return out;
 }
 /* eslint-enable no-param-reassign */
@@ -203,13 +203,13 @@ function _set(model, ...args) {
       if (model._attributes[item] !== obj[item]) {
         model._attributes[item] = obj[item];
         out[item] = obj[item];
-        if (!options.silent) model.fire(`change:${item}`, obj[item]);
+        if (!options.silent) model.$fire(`change:${item}`, obj[item]);
         match = true;
       }
     }
   }
   if (model._attributes.id) out.id = model._attributes.id;
-  if (!options.silent && match) model.fire('change', out);
+  if (!options.silent && match) model.$fire('change', out);
   return model._attributes;
 }
 /* eslint-enable no-param-reassign, no-unused-vars,

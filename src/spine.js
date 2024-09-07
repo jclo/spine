@@ -42,6 +42,12 @@
 
 
 // -- Local Modules
+// config must be imported the first as it is used by
+// model, collection, view ans router to initialize
+// the log library. Thus, $__TREE object must contain
+// the config object before the Javascript VM parses
+// those files.
+import config from './config';
 import M from './components/model/main';
 import C from './components/collection/main';
 import V from './components/view/main';
