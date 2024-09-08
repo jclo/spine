@@ -3,7 +3,7 @@
 ### 2.0.2 (September 8, 2024)
 
   * Updated the documentation,
-  * ...,
+  * Release.
 
 
 ### 2.0.1 (September 7, 2024)
