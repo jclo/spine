@@ -1,5 +1,11 @@
 ### HEAD
 
+### 2.0.2 (September 8, 2024)
+
+  * Updated the documentation,
+  * ...,
+
+
 ### 2.0.1 (September 7, 2024)
 
   * Added a clause to fetch to prevent an error being displayed during the client test,

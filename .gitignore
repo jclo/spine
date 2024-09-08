@@ -6,8 +6,8 @@ coverage
 node_modules
 
 _dist-*
-examplees
-examples
+/examplees
+/examples
 test/db
 
 site/*
