@@ -1,9 +1,9 @@
 ### HEAD
 
-### 2.0.x (September 11, 2024)
+### 2.0.3 (September 11, 2024)
 
   * Fixed regex on $initialize, $listen, etc. that failed on minified library,
-  * ...,
+  * Release.
 
 
 ### 2.0.2 (September 8, 2024)

@@ -1,5 +1,5 @@
 /*! ****************************************************************************
- * Spine v2.0.2
+ * Spine v2.0.3
  *
  * A tiny MVC framework inspired from Backbone.js.
  * (you can download it from npm or github repositories)
@@ -124,7 +124,7 @@
 
       // Useful to retrieve the library name and version when it is
       // embedded in another library as an object:
-      _library: { name: 'Spine', version: '2.0.2' },
+      _library: { name: 'Spine', version: '2.0.3' },
 
 
       // -- Private Static Methods ---------------------------------------------
@@ -271,7 +271,7 @@
 
     // Attaches constants to Spine that provide name and version of the lib.
     Spine.NAME = 'Spine';
-    Spine.VERSION = '2.0.2';
+    Spine.VERSION = '2.0.3';
 
 
     // -- Export
@@ -474,7 +474,6 @@
        * @since 0.0.0
        */
       _intInitialize(...args) {
-        // if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())) {
         if (!/^initialize\(\)\s*\{\}/.test(this.initialize.toString())) {
           log.warn('initialize method is deprecated, use $initialize instead!');
           this.initialize(...args);
@@ -493,7 +492,6 @@
        * @since 0.0.0
        */
       _intListen() {
-        // if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())) {
         if (!/^listen\(\)\s*\{\}/.test(this.listen.toString())) {
           log.warn('listen method is deprecated, use $listen instead!');
           this.listen();
@@ -512,7 +510,6 @@
        * @since 0.0.0
        */
       _intParse(...args) {
-        // if (!/^parse\((.*)\)[^{]+\{\s*\}/m.test(this.parse.toString())) {
         if (!/^parse\(\)\s*\{\}/.test(this.parse.toString())) {
           log.warn('parse method is deprecated, use $parse instead!');
           return this.parse(...args);
@@ -951,7 +948,6 @@
        * @since 0.0.0
        */
       _intInitialize(...args) {
-        // if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())) {
         if (!/^initialize\(\)\s*\{\}/.test(this.initialize.toString())) {
           log.warn('initialize method is deprecated, use $initialize instead!');
           this.initialize(...args);
@@ -970,7 +966,6 @@
        * @since 0.0.0
        */
       _intListen() {
-        // if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())) {
         if (!/^listen\(\)\s*\{\}/.test(this.listen.toString())) {
           log.warn('listen method is deprecated, use $listen instead!');
           this.listen();
@@ -1440,7 +1435,6 @@
        * @since 0.0.0
        */
       _intInitialize(...args) {
-        // if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())) {
         if (!/^initialize\(\)\s*\{\}/.test(this.initialize.toString())) {
           log.warn('initialize method is deprecated, use $initialize instead!');
           this.initialize(...args);
@@ -1459,7 +1453,6 @@
        * @since 0.0.0
        */
       _intListen() {
-        // if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())) {
         if (!/^listen\(\)\s*\{\}/.test(this.listen.toString())) {
           log.warn('listen method is deprecated, use $listen instead!');
           this.listen();
@@ -1669,7 +1662,6 @@
        * @since 0.0.0
        */
       _intInitialize(...args) {
-        // if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())) {
         if (!/^initialize\(\)\s*\{\}/.test(this.initialize.toString())) {
           log.warn('initialize method is deprecated, use $initialize instead!');
           this.initialize(...args);
@@ -1688,7 +1680,6 @@
        * @since 0.0.0
        */
       _intListen() {
-        // if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())) {
         if (!/^listen\(\)\s*\{\}/.test(this.listen.toString())) {
           log.warn('listen method is deprecated, use $listen instead!');
           this.listen();
