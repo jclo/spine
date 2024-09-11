@@ -133,8 +133,7 @@ mmethods = {
    * @since 0.0.0
    */
   _intInitialize(...args) {
-    if (!/^initialize\((.*)\)[^{]+\{\s*\}/m.test(this.initialize.toString())
-    ) {
+    if (!/^initialize\(\)\s*\{\}/.test(this.initialize.toString())) {
       log.warn('initialize method is deprecated, use $initialize instead!');
       this.initialize(...args);
       return;
@@ -152,8 +151,7 @@ mmethods = {
    * @since 0.0.0
    */
   _intListen() {
-    if (!/^listen\((.*)\)[^{]+\{\s*\}/m.test(this.listen.toString())
-    ) {
+    if (!/^listen\(\)\s*\{\}/.test(this.listen.toString())) {
       log.warn('listen method is deprecated, use $listen instead!');
       this.listen();
       return;
@@ -171,8 +169,7 @@ mmethods = {
    * @since 0.0.0
    */
   _intParse(...args) {
-    if (!/^parse\((.*)\)[^{]+\{\s*\}/m.test(this.parse.toString())
-    ) {
+    if (!/^parse\(\)\s*\{\}/.test(this.parse.toString())) {
       log.warn('parse method is deprecated, use $parse instead!');
       return this.parse(...args);
     }
