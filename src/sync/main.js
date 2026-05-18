@@ -29,7 +29,7 @@
 
 
 // -- Local Modules
-import F from './fetch';
+import F from './fetch.js';
 
 
 // -- Local Constants

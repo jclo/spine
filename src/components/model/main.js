@@ -50,7 +50,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -58,12 +58,12 @@ import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
-import config from '../../config';
-import _ from '../../libs/_';
-import Generic from '../generic/main';
-import U from '../../utils/util1';
-import F from './private/fetch';
-import U1 from './private/util';
+import config from '../../config.js';
+import _ from '../../libs/_.js';
+import Generic from '../generic/main.js';
+import U from '../../utils/util1.js';
+import F from './private/fetch.js';
+import U1 from './private/util.js';
 
 
 // -- Local Constants
@@ -73,7 +73,6 @@ const { level } = config.logger
 
 
 // -- Local Variables
-let mmethods;
 
 
 // -- Public ---------------------------------------------------------------
@@ -89,7 +88,6 @@ let mmethods;
  * @returns {Object}        returns the Spine object,
  * @since 0.0.0
  */
-/* eslint-disable prefer-spread, prefer-rest-params */
 const Model = function(methods) {
   let args;
   const Child = function() {
@@ -114,12 +112,11 @@ const Model = function(methods) {
   Child.prototype.constructor = Child;
   return Child;
 };
-/* eslint-enable prefer-spread, prefer-rest-params */
 
 
 // -- Public Methods -------------------------------------------------------
 
-mmethods = {
+const mmethods = {
 
   // -- Private Methods ----------------------------------------------------
 
@@ -203,7 +200,6 @@ mmethods = {
    * @returns {Object}      return the parsed object,
    * @since 0.0.0
    */
-  /* eslint-disable no-restricted-syntax */
   _parse(data, options) {
     let obj = data || {};
     obj = options && options.parse ? this._intParse(obj) : obj;
@@ -214,7 +210,6 @@ mmethods = {
     }
     return obj;
   },
-  /* eslint-enable no-restricted-syntax */
 
 
   // -- Empty Public Methods -----------------------------------------------
@@ -464,4 +459,4 @@ mmethods = {
 // -- Export
 export default { Model };
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

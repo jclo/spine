@@ -23,17 +23,14 @@
  * @since        0.0.0
  * @version      -
  * ************************************************************************** */
-/* eslint one-var: 0, semi-style: 0, no-underscore-dangle: 0, no-console: 0
-  import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
 
 
 // -- Vendor Modules
-const http         = require('http')
-    , express      = require('express')
-    , bodyParser   = require('body-parser')
-    , cookieParser = require('cookie-parser')
-    , session      = require('express-session')
-    ;
+import http from 'http';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 
 // -- Local Modules
@@ -259,8 +256,8 @@ const _cors = function() {
 // Here we configure 'app' to accept both JSON and url encoded payloads
 // and to serve the static page 'public/index.html'.
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // This block implements a session connection from a client web app. if
 // your App doesn't implement a login session, you can safely remove
@@ -269,8 +266,8 @@ app.use(cookieParser());
 app.use(session({
   name: 'app',
   secret: 'p!550ff',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: {
     path: '/',
     httponly: true,
@@ -290,14 +287,14 @@ _listen4test(app);
 
 
 // Unknown routes:
-app.all('/api/*', (req, res) => {
+app.use('/api', (req, res) => {
   res.statusMessage = `${req.method} api "${req.url}" does not exist!`;
   console.log(res.statusMessage);
   res.status(403).end();
 });
 
 // Forbidden routes:
-app.all('/*', (req, res) => {
+app.use((req, res) => {
   res.statusMessage = 'This route is forbidden!';
   console.log(res.statusMessage);
   res.status(403).end();

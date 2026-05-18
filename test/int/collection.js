@@ -1,26 +1,21 @@
 // ESLint declarations:
-/* global describe, it */
-/* eslint one-var: 0, no-unused-vars: 0, semi-style: 0, no-underscore-dangle: 0
-  no-unused-expressions: 0 */
+/* global describe */
+/* - */
 
 
 // -- Vendor Modules
-const should     = require('chai').should()
-    , { expect } = require('chai')
-    ;
 
 
 // -- Local Modules
-const test1 = require('./collection/collection_1')
-    , test2 = require('./collection/collection_2')
-    , test3 = require('./collection/collection_3')
-    , test4 = require('./collection/collection_4')
-    , test5 = require('./collection/collection_5')
-    , test6 = require('./collection/collection_6')
-    , test7 = require('./collection/collection_7')
-    , test8 = require('./collection/collection_8')
-    , test9 = require('./collection/collection_9')
-    ;
+import test1 from './collection/collection_1.js';
+import test2 from './collection/collection_2.js';
+import test3 from './collection/collection_3.js';
+import test4 from './collection/collection_4.js';
+import test5 from './collection/collection_5.js';
+import test6 from './collection/collection_6.js';
+import test7 from './collection/collection_7.js';
+import test8 from './collection/collection_8.js';
+import test9 from './collection/collection_9.js';
 
 
 // -- Local Constants
@@ -30,7 +25,7 @@ const test1 = require('./collection/collection_1')
 
 
 // -- Main
-module.exports = function(Spine, apiserver) {
+export default function(Spine, apiserver) {
   describe('Test Spine.Collection:', () => {
     test1(Spine, apiserver);
     test2(Spine, apiserver);

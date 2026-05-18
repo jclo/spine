@@ -27,7 +27,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -276,7 +276,9 @@ const Fetch = {
   fetch(...args) /* istanbul ignore next */{
     const [url, options, type, callback] = _getArgs(...args);
     _fetch(url, options, type || 'json', (err, data) => {
-      if (callback) callback(err, data);
+      if (callback) {
+        callback(err, data);
+      }
     });
     return this;
   },
@@ -286,4 +288,4 @@ const Fetch = {
 // -- Export
 export default Fetch;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

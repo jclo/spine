@@ -1,13 +1,10 @@
 // ESLint declarations:
 /* global describe, it */
-/* eslint one-var: 0, no-unused-vars: 0, semi-style: 0, no-underscore-dangle: 0
-  no-unused-expressions: 0 */
+/* eslint no-unused-vars: 0 */
 
 
 // -- Vendor Modules
-const should     = require('chai').should()
-    , { expect } = require('chai')
-    ;
+import { expect } from 'chai';
 
 
 // -- Local Modules
@@ -20,7 +17,7 @@ const should     = require('chai').should()
 
 
 // -- Main
-module.exports = function(Spine, apiserver) {
+export default function(Spine, apiserver) {
   describe('Test Spine.Model object methods:', () => {
     describe('Test Spine.Model object creation:', () => {
       const M = Spine.Model({ url: '' });
@@ -82,7 +79,6 @@ module.exports = function(Spine, apiserver) {
       const M = Spine.Model({
         url: '',
         $parse(obj) {
-          /* eslint-disable-next-line */
           obj.z = 'zzz';
           return obj;
         },

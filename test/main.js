@@ -1,23 +1,22 @@
 // ESLint declarations:
 /* global describe */
-/* eslint one-var: 0, semi-style: 0 */
+/* eslint no-unused-vars: 0 */
 
 
 // -- Vendor Modules
-const { JSDOM } = require('jsdom');
+import { JSDOM } from 'jsdom';
 
 
 // -- Local Modules
-const pack           = require('../package.json')
-    , testlib        = require('./int/lib')
-    , testmodel      = require('./int/model')
-    , testcollection = require('./int/collection')
-    , testview       = require('./int/view')
-    , testrouter     = require('./int/router')
-    , testradio      = require('./int/radio')
-    , testhistory    = require('./int/history')
-    , testintercom   = require('./int/intercom')
-    ;
+import pack from '../package.json' with { type: 'json' };
+import testlib from './int/lib.js';
+import testmodel from './int/model.js';
+import testcollection from './int/collection.js';
+import testview from './int/view.js';
+import testrouter from './int/router.js';
+import testradio from './int/radio.js';
+import testhistory from './int/history.js';
+import testintercom from './int/intercom.js';
 
 
 // -- Local Constants
@@ -50,21 +49,21 @@ const dom = new JSDOM(HTML);
 global.window = dom.window;
 global.root = dom.window;
 global.document = dom.window.document;
-global.navigator = { userAgent: 'node.js' };
+// global.navigator = { userAgent: 'node.js' };
 
 // Nota:
 // If you want that 'display-coverage' shows the coverage files by files,
 // you should set 'Spine' and 'testlib' like this:
-//  . const Spine = require('../src/<file>').default;
+//  . const Spine = (await import('../src/spine.js')).default;
 //  . testlib(Spine, '{{lib:name}}', '{{lib:version}}', 'without new');
 //
 // But, if you want that 'display-coverage' shows the coverage in one file,
 // you should set 'Spine' and 'testlib' like this:
-//  . const Spine = require('../index');
+//  . const Spine = (await import('../index.js')).default;
 //  . testlib(Spine, libname, pack.version, 'without new');
 
-const Spine = require('../src/spine').default;
-// const Spine = require('../index');
+const Spine = (await import('../src/spine.js')).default;
+// const Spine (await import('../index.js')).default;
 
 describe('Test Spine:', () => {
   testlib(Spine, '{{lib:name}}', '{{lib:version}}', 'without new');
@@ -79,5 +78,6 @@ describe('Test Spine:', () => {
   testhistory(Spine);
   testintercom(Spine);
 });
+
 
 // - oOo --

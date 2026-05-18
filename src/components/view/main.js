@@ -40,7 +40,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -48,9 +48,9 @@ import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
-import config from '../../config';
-import _ from '../../libs/_';
-import Generic from '../generic/main';
+import config from '../../config.js';
+import _ from '../../libs/_.js';
+import Generic from '../generic/main.js';
 
 
 // -- Local Constants
@@ -60,7 +60,6 @@ const { level } = config.logger
 
 
 // -- Local Variables
-let vmethods;
 
 
 // -- Public ---------------------------------------------------------------
@@ -78,7 +77,6 @@ let vmethods;
  * @returns {Object}        returns the View object,
  * @since 0.0.0
  */
-/* eslint-disable prefer-spread, prefer-rest-params */
 const View = function(methods) {
   let args;
   const Child = function() {
@@ -103,10 +101,9 @@ const View = function(methods) {
   Child.prototype.constructor = Child;
   return Child;
 };
-/* eslint-enable prefer-spread, prefer-rest-params */
 
 
-vmethods = {
+const vmethods = {
 
   // -- Private Methods ----------------------------------------------------
 
@@ -216,4 +213,4 @@ vmethods = {
 // -- Export
 export default { View };
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

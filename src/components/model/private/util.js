@@ -26,14 +26,14 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* eslint-disable curly */
 
 
 // -- Vendor Modules
 
 
 // -- Local Modules
-import _ from '../../../libs/_';
+import _ from '../../../libs/_.js';
 
 
 // -- Local Constants
@@ -159,7 +159,6 @@ function _getRmArgs(...args) {
  * @returns {Object}       returns the removed properties and their values,
  * @since 0.0.0
  */
-/* eslint-disable no-param-reassign */
 function _remove(model, ...args) {
   const [obj, options] = _getRmArgs(...args)
       , mattr          = Object.keys(model._attributes)
@@ -179,7 +178,6 @@ function _remove(model, ...args) {
   if (!options.silent) model.$fire('remove', out);
   return out;
 }
-/* eslint-enable no-param-reassign */
 
 /**
  * Updates the model with the passed-in properties.
@@ -191,8 +189,6 @@ function _remove(model, ...args) {
  * @returns {Object}       returns the updated model,
  * @since 0.0.0
  */
-/* eslint-disable no-param-reassign, no-unused-vars,
-  no-restricted-syntax */
 function _set(model, ...args) {
   const [obj, options] = _getSetArgs(...args);
   const out = {};
@@ -212,8 +208,6 @@ function _set(model, ...args) {
   if (!options.silent && match) model.$fire('change', out);
   return model._attributes;
 }
-/* eslint-enable no-param-reassign, no-unused-vars,
-  no-restricted-syntax */
 
 
 // -- Public Static Methods ------------------------------------------------
@@ -253,4 +247,4 @@ const Util = {
 // -- Export
 export default Util;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* eslint-enable curly */

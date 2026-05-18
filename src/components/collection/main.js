@@ -51,7 +51,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -59,14 +59,14 @@ import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
-import config from '../../config';
-import _ from '../../libs/_';
-import Generic from '../generic/main';
-import M from '../model/main';
-import U from '../../utils/util1';
-import U1 from './private/util1';
-import U2 from './private/util2';
-import U3 from './private/util3';
+import config from '../../config.js';
+import _ from '../../libs/_.js';
+import Generic from '../generic/main.js';
+import M from '../model/main.js';
+import U from '../../utils/util1.js';
+import U1 from './private/util1.js';
+import U2 from './private/util2.js';
+import U3 from './private/util3.js';
 
 
 // -- Local Constants
@@ -76,7 +76,6 @@ const { level } = config.logger
 
 
 // -- Local Variables
-let cmethods;
 
 
 // -- Public ---------------------------------------------------------------
@@ -92,7 +91,6 @@ let cmethods;
  * @returns {Object}        returns the Spine object,
  * @since 0.0.0
  */
-/* eslint-disable prefer-spread, prefer-rest-params */
 const Collection = function(methods) {
   let args;
   const Child = function() {
@@ -117,12 +115,11 @@ const Collection = function(methods) {
   Child.prototype.constructor = Child;
   return Child;
 };
-/* eslint-enable prefer-spread, prefer-rest-params */
 
 
 // -- Public Methods -------------------------------------------------------
 
-cmethods = {
+const cmethods = {
 
   // -- Private Methods ----------------------------------------------------
 
@@ -496,4 +493,4 @@ cmethods = {
 // -- Export
 export default { Collection };
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

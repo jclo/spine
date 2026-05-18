@@ -27,7 +27,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -175,4 +175,4 @@ const History = {
 // -- Export
 export default History;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

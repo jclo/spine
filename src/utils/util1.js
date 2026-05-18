@@ -2,8 +2,8 @@
  *
  * Implements a few shared utility primitives.
  *
- * util1.js is just a literal object that contains a set of functions. It
- * can't be intantiated.
+ * util1.js is just a literal object that contains a set of functions.
+ * It can't be instantiated.
  *
  * Private Functions:
  *  . _getUriArgs                 decodes the arguments,
@@ -27,14 +27,14 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle, no-restricted-syntax */
+/* - */
 
 
 // -- Vendor Modules
 
 
 // -- Local Modules
-import _ from '../libs/_';
+import _ from '../libs/_.js';
 
 
 // -- Local Constants
@@ -93,7 +93,9 @@ function _getUriArgs(...args) {
  * @since 0.0.0
  */
 function _getQuery(query) {
-  if (!_.isLiteralObject(query)) return '';
+  if (!_.isLiteralObject(query)) {
+    return '';
+  }
 
   let s = '?';
   for (const item in query) {
@@ -120,7 +122,9 @@ function _getQuery(query) {
  * @since 0.0.0
  */
 function _getParams(params) {
-  if (!_.isLiteralObject(params)) return '';
+  if (!_.isLiteralObject(params)) {
+    return '';
+  }
 
   let s = params._params;
   for (const item in params) {
@@ -162,8 +166,7 @@ function _getUrl(url, options) {
  */
 function _urify(...args) {
   const [url, options] = _getUriArgs(...args);
-  if (!url) return null;
-  return _getUrl(url, { query: options });
+  return url ? _getUrl(url, { query: options }) : null;
 }
 
 
@@ -204,4 +207,4 @@ const Util = {
 // -- Export
 export default Util;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle, no-restricted-syntax */
+/* - */

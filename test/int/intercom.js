@@ -1,12 +1,10 @@
 // ESLint declarations:
 /* global describe, it */
-/* eslint one-var: 0, no-unused-vars: 0, semi-style: 0 */
+/* eslint no-unused-vars: 0 */
 
 
 // -- Vendor Modules
-const should     = require('chai').should()
-    , { expect } = require('chai')
-    ;
+import { expect } from 'chai';
 
 
 // -- Local Modules
@@ -19,7 +17,7 @@ const should     = require('chai').should()
 
 
 // -- Main
-module.exports = function(Spine) {
+export default function(Spine) {
   const M = Spine.Model({});
   const m = M();
 

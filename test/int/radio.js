@@ -1,13 +1,10 @@
 // ESLint declarations:
 /* global describe, it */
-/* eslint one-var: 0, no-unused-vars: 0, semi-style: 0, no-underscore-dangle: 0
-  no-unused-expressions: 0 */
+/* - */
 
 
 // -- Vendor Modules
-const should     = require('chai').should()
-    , { expect } = require('chai')
-    ;
+import { expect } from 'chai';
 
 
 // -- Local Modules
@@ -20,7 +17,7 @@ const should     = require('chai').should()
 
 
 // -- Main
-module.exports = function(Spine) {
+export default function(Spine) {
   describe('Test Spine.Radio:', () => {
     it('Expects Spine.Radio to return an object.', () => {
       expect(Spine.Radio).to.be.an('object');

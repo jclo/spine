@@ -26,21 +26,18 @@
  * @since        0.0.0
  * @version      -
  * ************************************************************************** */
-/* eslint one-var: 0, semi-style: 0, no-underscore-dangle: 0,
-  import/no-extraneous-dependencies: 0 */
+/* eslint curly: 0 */
 
 
 // -- Vendor Modules
-const fs    = require('fs')
-    , nopt  = require('nopt')
-    , Kadoo = require('kadoo')
-    ;
+import fs from 'fs';
+import nopt from 'nopt';
+import Kadoo from 'kadoo';
 
 
 // -- Local Modules
-const pack   = require('../package.json')
-    , config = require('./config')
-    ;
+import pack from '../package.json' with { type: 'json' };
+import config from './config.js';
 
 
 // -- Local Constants
@@ -193,7 +190,7 @@ function _doUMD(core, done) {
  * @returns {}              -,
  * @since 0.0.0
  */
-function _doLib(input, done) {console.log(input);
+function _doLib(input, done) {
   const kadoo = Kadoo(input, { export: 'generic', type: 'generic' });
 
   kadoo.get((data) => {

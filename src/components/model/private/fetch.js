@@ -28,16 +28,16 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* eslint-disable curly */
 
 
 // -- Vendor Modules
 
 
 // -- Local Modules
-import _ from '../../../libs/_';
-import F from '../../../sync/main';
-import U from '../../../utils/util1';
+import _ from '../../../libs/_.js';
+import F from '../../../sync/main.js';
+import U from '../../../utils/util1.js';
 
 
 // -- Local Constants
@@ -151,7 +151,6 @@ function _getArgs4Save(...args) {
  * @returns {}              -,
  * @since 0.0.0
  */
-/* eslint-disable no-param-reassign */
 function _fetch(model, url, ...args) {
   const [opts, callback] = _getArgs4FetchAndDelete(...args);
 
@@ -185,7 +184,6 @@ function _fetch(model, url, ...args) {
     }
   });
 }
-/* eslint-enable no-param-reassign */
 
 /**
  * Sends one object to the server.
@@ -331,4 +329,4 @@ const Util = {
 // -- Export
 export default Util;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* eslint-enable curly */

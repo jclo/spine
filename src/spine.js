@@ -2,8 +2,8 @@
  *
  * Defines the Spine object.
  *
- * spine.js is just a literal object that contains a set of functions. It
- * can't be intantiated.
+ * spine.js is just a literal object that contains a set of functions.
+ * It can't be instantiated.
  *
  * Private Functions:
  *  . none,
@@ -35,8 +35,7 @@
  * @version      -
  * ********************************************************************** */
 /* global root */
-/* eslint-disable no-underscore-dangle */
-
+/* - */
 
 // -- Vendor Modules
 
@@ -47,22 +46,19 @@
 // the log library. Thus, $__TREE object must contain
 // the config object before the Javascript VM parses
 // those files.
-import config from './config';
-import M from './components/model/main';
-import C from './components/collection/main';
-import V from './components/view/main';
-import R from './components/router/main';
+import config from './config.js';
+import M from './components/model/main.js';
+import C from './components/collection/main.js';
+import V from './components/view/main.js';
+import R from './components/router/main.js';
 
-import History from './components/history/main';
-import Radio from './components/radio/main';
-import Sync from './sync/main';
-import U from './utils/util1';
+import History from './components/history/main.js';
+import Radio from './components/radio/main.js';
+import Sync from './sync/main.js';
+import U from './utils/util1.js';
 
 
 // -- Local Constants
-// Saves the previous value of the library variable, so that it can be
-// restored later on, if noConflict is used.
-const previousSpine = root.Spine;
 
 
 // -- Local Variables
@@ -111,7 +107,6 @@ const Spine = {
    * @since 0.0.0
    */
   noConflict() {
-    /* eslint-disable-next-line no-param-reassign */
     root.Spine = previousSpine;
     return this;
   },
@@ -223,8 +218,12 @@ const Spine = {
 Spine.NAME = '{{lib:name}}';
 Spine.VERSION = '{{lib:version}}';
 
+// Saves the previous value of the library variable, so that it can be
+// restored later on, if noConflict is used.
+const previousSpine = root.Spine;
+
 
 // -- Export
 export default Spine;
 
-/* eslint-enable no-underscore-dangle */
+/* - */

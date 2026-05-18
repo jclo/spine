@@ -41,8 +41,8 @@
  * @since        0.0.0
  * @version      -
  * ********************************************************************** */
-/* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* global location */
+/* eslint-disable curly */
 
 
 // -- Vendor Modules
@@ -50,11 +50,11 @@ import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
-import config from '../../config';
-import _ from '../../libs/_';
-import Generic from '../generic/main';
-import History from '../history/main';
-import Util from './util';
+import config from '../../config.js';
+import _ from '../../libs/_.js';
+import Generic from '../generic/main.js';
+import History from '../history/main.js';
+import Util from './util.js';
 
 
 // -- Local Constants
@@ -64,7 +64,6 @@ const { level } = config.logger
 
 
 // -- Local Variables
-let vmethods;
 
 
 // -- Public ---------------------------------------------------------------
@@ -82,7 +81,6 @@ let vmethods;
  * @returns {Object}        returns the Spine.Router object,
  * @since 0.0.0
  */
-/* eslint-disable prefer-spread, prefer-rest-params */
 const Router = function(methods) {
   let args;
   const Child = function() {
@@ -107,10 +105,9 @@ const Router = function(methods) {
   Child.prototype.constructor = Child;
   return Child;
 };
-/* eslint-enable prefer-spread, prefer-rest-params */
 
 
-vmethods = {
+const vmethods = {
 
   // -- Private Methods ----------------------------------------------------
 
@@ -252,7 +249,6 @@ vmethods = {
   $navigate(path, options) {
     this._trigger = options && options.trigger;
     this._replace = options && options.replace;
-    /* eslint-disable-next-line no-restricted-globals */
     location.hash = `#${path}`;
     return this;
   },
@@ -303,4 +299,4 @@ vmethods = {
 // -- Export
 export default { Router };
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* eslint-enable curly */

@@ -24,15 +24,15 @@
  * @since        0.0.0
  * @version      -
  * ********************************************************************** */
-/* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* global location, window */
+/* - */
 
 
 // -- Vendor Modules
 
 
 // -- Local Modules
-import History from '../history/main';
+import History from '../history/main.js';
 
 
 // -- Local Constants
@@ -151,7 +151,6 @@ function _decodeParams(routes, url) {
  * @since 0.0.0
  */
 function _route() {
-  /* eslint-disable-next-line no-restricted-globals */
   const url  = location.hash.slice(1);
 
   let route;
@@ -226,4 +225,4 @@ const Util = {
 // -- Export
 export default Util;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

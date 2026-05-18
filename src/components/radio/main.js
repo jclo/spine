@@ -26,7 +26,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -128,4 +128,4 @@ const Radio = {
 // -- Export
 export default Radio;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

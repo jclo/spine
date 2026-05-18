@@ -48,7 +48,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -57,7 +57,7 @@ import KZlog from '@mobilabs/kzlog';
 
 
 // -- Local Modules
-import config from '../../config';
+import config from '../../config.js';
 
 
 // -- Local Constants
@@ -234,4 +234,4 @@ const methods = {
 // -- Export
 export default { Construct, methods };
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

@@ -22,7 +22,7 @@
  * @version      -
  * ********************************************************************** */
 /* global */
-/* eslint-disable one-var, semi-style, no-underscore-dangle */
+/* - */
 
 
 // -- Vendor Modules
@@ -50,4 +50,4 @@ const Config = {
 // -- Export
 export default Config;
 
-/* eslint-enable one-var, semi-style, no-underscore-dangle */
+/* - */

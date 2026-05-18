@@ -1,1 +1,2 @@
-module.exports = require('./lib/spine');
+import Spine from './lib/spine.mjs';
+export default Spine;

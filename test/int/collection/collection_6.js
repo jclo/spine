@@ -1,13 +1,10 @@
 // ESLint declarations:
 /* global describe, it */
-/* eslint one-var: 0, no-unused-vars: 0, semi-style: 0, no-underscore-dangle: 0
-  no-unused-expressions: 0 */
+/* - */
 
 
 // -- Vendor Modules
-const should     = require('chai').should()
-    , { expect } = require('chai')
-    ;
+import { expect } from 'chai';
 
 
 // -- Local Modules
@@ -20,7 +17,7 @@ const should     = require('chai').should()
 
 
 // -- Main
-module.exports = function(Spine, apiserver) {
+export default function(Spine, apiserver) {
   describe('Test Spine.Collection object methods (next):', () => {
     describe('Test $delete method:', () => {
       const C = Spine.Collection({ url: `${apiserver}/api/v1/accounts` });
