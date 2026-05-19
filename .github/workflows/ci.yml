@@ -15,8 +15,6 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build:dev
-
-      - run: npm run server:api &
       - run: npm test
       - run: npm run check:coverage
 

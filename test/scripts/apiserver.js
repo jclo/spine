@@ -6,6 +6,8 @@
  * listens for requests sent by the client (see core/routes).
  *
  * Private Functions:
+ *  . _print                      prints or not the message,
+ *  . _processWrite               prints or not the message,
  *  . _deleted                    builds the server response to delete request,
  *  . _listen4examples            listens routes from 'examples',
  *  . _listen4test                listens routes from test program,
@@ -37,12 +39,44 @@ import session from 'express-session';
 
 
 // -- Local Constants
+const LISTENING_PORT = 1080;
 
 
 // -- Local Variables
+let SILENT = false;
 
 
 // -- Private Functions --------------------------------------------------------
+
+/**
+ * Prints or not the message.
+ *
+ * @function (arg1)
+ * @private
+ * @param {String}          the mmessage to print on. the console,
+ * @returns {}              returns -,
+ * @since 0.0.0
+ */
+function _print(mess) {
+  if (!SILENT) {
+    console.log(mess);
+  }
+}
+
+/**
+ * Prints or not the message.
+ *
+ * @function (arg1)
+ * @private
+ * @param {String}          the mmessage to print on. the console,
+ * @returns {}              returns -,
+ * @since 0.0.0
+ */
+function _processWrite(mess) {
+  if (!SILENT) {
+    process.stdout.write(mess);
+  }
+}
 
 /**
  * Builds the server response to delete request.
@@ -84,36 +118,36 @@ function _listen4examples(app) {
   // GET MODEL
   app.get('/examples/api/v1/account/:id', (req, res) => {
     res.status(200).send({ a: 1, b: 2, c: 3 });
-    console.log('Accepted GET api: "api/v1/account/".');
-    console.log('Got id:');
-    console.log(req.params);
+    _print('Accepted GET api: "api/v1/account/".');
+    _print('Got id:');
+    _print(req.params);
   });
 
 
   // POST MODEL
   app.post('/examples/api/v1/account', (req, res) => {
     res.status(200).send(req.body);
-    console.log('Got:');
-    console.log(req.body);
-    console.log('Accepted POST api: "api/v1/account".');
+    _print('Got:');
+    _print(req.body);
+    _print('Accepted POST api: "api/v1/account".');
   });
 
 
   // DELETE MODEL
   app.delete('/examples/api/v1/account/:id', (req, res) => {
     res.status(200).send('done');
-    console.log('Got:');
-    console.log(req.params);
-    console.log('Accepted GET api: "api/v1/account".');
+    _print('Got:');
+    _print(req.params);
+    _print('Accepted GET api: "api/v1/account".');
   });
 
 
   // GET COLLECTION
   app.get('/examples/api/v1/accounts', (req, res) => {
     res.status(200).send([{ a: 1, b: 2, c: 3 }, { id: 44, d: 'a', e: 'b', c: 'c' }]);
-    console.log('Accepted GET api: "api/v1/accounts/".');
-    console.log('Got:');
-    console.log(req.query);
+    _print('Accepted GET api: "api/v1/accounts/".');
+    _print('Got:');
+    _print(req.query);
   });
 }
 
@@ -130,51 +164,51 @@ function _listen4test(app) {
   // GET MODEL
   app.get('/api/v1/account/:id', (req, res) => {
     res.status(200).send({ a: 1, b: 2 });
-    console.log('Accepted GET api: "api/v1/account/".');
-    console.log('  Got params:');
-    process.stdout.write('    ');
-    console.log(req.params);
-    console.log('  Returned:');
-    process.stdout.write('    ');
-    console.log({ a: 1, b: 2 });
+    _print('Accepted GET api: "api/v1/account/".');
+    _print('  Got params:');
+    _processWrite('    ');
+    _print(req.params);
+    _print('  Returned:');
+    _processWrite('    ');
+    _print({ a: 1, b: 2 });
   });
 
   app.get('/api/v1/account', (req, res) => {
     res.status(200).send({ a: 1, b: 2 });
-    console.log('Accepted GET api: "api/v1/account/".');
-    console.log('  Got query:');
-    process.stdout.write('    ');
-    console.log(req.query);
-    console.log('  Returned:');
-    process.stdout.write('    ');
-    console.log({ a: 1, b: 2 });
+    _print('Accepted GET api: "api/v1/account/".');
+    _print('  Got query:');
+    _processWrite('    ');
+    _print(req.query);
+    _print('  Returned:');
+    _processWrite('    ');
+    _print({ a: 1, b: 2 });
   });
 
 
   // POST MODEL
   app.post('/api/v1/account', (req, res) => {
     res.status(200).send('done');
-    console.log('Accepted POST api: "api/v1/account/".');
-    console.log('  Got:');
-    process.stdout.write('    ');
-    console.log(req.body);
-    console.log('  Returned:');
-    console.log('    done');
+    _print('Accepted POST api: "api/v1/account/".');
+    _print('  Got:');
+    _processWrite('    ');
+    _print(req.body);
+    _print('  Returned:');
+    _print('    done');
   });
 
 
   // DELETE MODEL
   app.delete('/api/v1/account/:id', (req, res) => {
     res.status(200).send('done');
-    console.log('Accepted DELETE api: "api/v1/account".');
-    console.log('  Got path:');
-    process.stdout.write('    ');
-    console.log(req.route.path);
-    console.log('  Got params:');
-    process.stdout.write('    ');
-    console.log(req.params);
-    console.log('  Returned:');
-    console.log('    done');
+    _print('Accepted DELETE api: "api/v1/account".');
+    _print('  Got path:');
+    _processWrite('    ');
+    _print(req.route.path);
+    _print('  Got params:');
+    _processWrite('    ');
+    _print(req.params);
+    _print('  Returned:');
+    _print('    done');
   });
 
 
@@ -183,28 +217,28 @@ function _listen4test(app) {
     const collection = [{ id: 1, a: 1, b: 2 }, { id: 2, c: 3, d: 4 }];
 
     res.status(200).send(collection);
-    console.log('Accepted GET api: "api/v1/accounts/".');
-    console.log('  Got path:');
-    process.stdout.write('    ');
-    console.log(req.route.path);
-    console.log('  Got query:');
-    process.stdout.write('    ');
-    console.log(req.query);
-    console.log('  Returned:');
-    process.stdout.write('    ');
-    console.log(collection);
+    _print('Accepted GET api: "api/v1/accounts/".');
+    _print('  Got path:');
+    _processWrite('    ');
+    _print(req.route.path);
+    _print('  Got query:');
+    _processWrite('    ');
+    _print(req.query);
+    _print('  Returned:');
+    _processWrite('    ');
+    _print(collection);
   });
 
 
   // POST COLLECTION
   app.post('/api/v1/accounts', (req, res) => {
     res.status(200).send([{ id: 1, a: 11, b: 22 }, { id: 2, a: 1111, b: 2222 }]);
-    console.log('Accepted POST api: "api/v1/accounts/".');
-    console.log('  Got:');
-    process.stdout.write('    ');
-    console.log(req.body);
-    console.log('  Returned:');
-    console.log('    done');
+    _print('Accepted POST api: "api/v1/accounts/".');
+    _print('  Got:');
+    _processWrite('    ');
+    _print(req.body);
+    _print('  Returned:');
+    _print('    done');
   });
 
   // DELETE COLLECTION
@@ -213,17 +247,17 @@ function _listen4test(app) {
     const deleted = _deleted(req.query.ids);
 
     res.status(200).send(deleted);
-    console.log('Accepted DELETE api: "api/v1/accounts".');
-    console.log('  Got path:');
-    process.stdout.write('    ');
-    console.log(req.route.path);
-    console.log('  Got query:');
-    process.stdout.write('    ');
-    console.log(req.query);
-    console.log('  Returned:');
-    process.stdout.write('    ');
-    console.log(deleted);
-    console.log('    done');
+    _print('Accepted DELETE api: "api/v1/accounts".');
+    _print('  Got path:');
+    _processWrite('    ');
+    _print(req.route.path);
+    _print('  Got query:');
+    _processWrite('    ');
+    _print(req.query);
+    _print('  Returned:');
+    _processWrite('    ');
+    _print(deleted);
+    _print('    done');
   });
 }
 
@@ -252,6 +286,11 @@ const _cors = function() {
  * Starts the App server.
  *
  */
+
+// Capture the arguments.
+if (process.env.API_SERVER_STATUS === 'silent') {
+  SILENT = true;
+}
 
 // Here we configure 'app' to accept both JSON and url encoded payloads
 // and to serve the static page 'public/index.html'.
@@ -285,6 +324,10 @@ app.use(express.static('./'));
 _listen4examples(app);
 _listen4test(app);
 
+// Respond to start-server-and-test
+app.get('/health', (req, res) => {
+  res.status(200).send('ok');
+});
 
 // Unknown routes:
 app.use('/api', (req, res) => {
@@ -304,7 +347,7 @@ app.use((req, res) => {
 http.createServer(app)
   .on('error', (e) => {
     if (e.code === 'EACCES') {
-      console.log('You don\'t have the privileges to listen the port: 1080.');
+      console.log(`You don't have the privileges to listen the port: ${LISTENING_PORT}.`);
     } else {
       console.log(e);
     }
@@ -312,8 +355,8 @@ http.createServer(app)
   // '127.0.0.1' means allowing access to the local machine only. If you
   // want to authorize the server to listen any machines on the
   // network, replace '127.0.0.1' by '0.0.0.0'.
-  .listen(1080, '127.0.0.1', () => {
-    console.log('http listening on port 1080.');
+  .listen(LISTENING_PORT, '127.0.0.1', () => {
+    console.log(`http listening on port ${LISTENING_PORT}.`);
   });
 
 

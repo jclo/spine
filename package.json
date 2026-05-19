@@ -29,16 +29,18 @@
 
     "testing": " --- TESTING --- ",
     "pretest": "sh test/prepare4test.sh to-mjs",
-    "test": "cross-env NODE_ENV=test c8 --reporter=lcov mocha ./test/main.js",
+    "test:run": "cross-env NODE_ENV=test c8 --reporter=lcov mocha ./test/main.js",
+    "test": "cross-env API_SERVER_STATUS=silent start-server-and-test server:api:start http://127.0.0.1:1080/health test:run",
     "posttest": "sh test/prepare4test.sh back-to-js",
     "display:coverage": "open -a safari ./coverage/lcov-report/index.html",
     "check:coverage": "c8 check-coverage --statements 80 --branches 80 --functions 60 --lines 80",
     "report": "c8 report",
 
     "serving": " --- SERVING --- ",
-    "server:api": "node test/scripts/apiserver.js",
-    "server:dev": "http-server --port 8080",
-    "server:prod": "http-server --port 8090",
+    "server:api:start": "node test/scripts/apiserver.js",
+    "server:api:start:silent": "cross-env API_SERVER_STATUS=silent node test/scripts/apiserver.js",
+    "server:dev:start": "http-server --port 8080",
+    "server:prod:start": "http-server --port 8090",
 
     "watch:js:css": " --- WATCHING --- ",
     "watch:js": "nodemon --watch './src/**/*.js' --exec npm run build:dev",
@@ -95,6 +97,7 @@
     "kadoo": "^1.3.0",
     "mocha": "^11.7.5",
     "nodemon": "^3.1.14",
+    "start-server-and-test": "^3.0.5",
     "terser": "^5.47.1",
     "@mobilabs/es6kadoo": "3.0.0-beta.1.3"
   },
