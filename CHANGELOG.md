@@ -6,6 +6,7 @@
   * Released 3.0.0-beta.1.0,
   * Added the "start-server-and-test" module to automatically start the api server,
   * Added publishing and documenting scripts to package.json,
+  * Released 3.0.0-beta.2.0,
   * ...,
 
 
