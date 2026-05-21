@@ -1,10 +1,11 @@
 ### HEAD
 
-### 3.0.0 (May 18, 2026)
+### 3.0.0 (May 21, 2026)
 
   * Updated the project with @mobilabs/es6kadoo ESM v3,
   * Released 3.0.0-beta.1.0,
   * Added the "start-server-and-test" module to automatically start the api server,
+  * Added publishing and documenting scripts to package.json,
   * ...,
 
 
